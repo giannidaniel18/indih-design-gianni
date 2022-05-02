@@ -1,1 +1,1 @@
-Proyecto react - Curso Coderhouse- Comision 31165
+Proyecto react - Curso Coderhouse- Comisión 31165
