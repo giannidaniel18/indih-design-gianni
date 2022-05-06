@@ -1,18 +1,17 @@
+import { Box } from "@chakra-ui/react";
 import { useState } from "react";
-import { Box, Stack } from "@chakra-ui/react";
-import NavBar from "./components/NavBar/NavBar"
 import ItemListContainer from "./components/ContainerComponents/ItemListContainer";
+import NavBar from "./components/NavBar/NavBar";
 
 
 function App() {
-  const [count, setCount] = useState(0);
+  
 
   return (
-    <>
-     
-     <NavBar/>
-      <ItemListContainer/>    
-        </>
+    <Box maxWidth={'90%'} m="auto">
+      <NavBar />
+      <ItemListContainer/>
+    </Box>
   );
 }
 
