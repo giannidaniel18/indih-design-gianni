@@ -16,13 +16,10 @@ import {
 
 import { BsCart } from "react-icons/bs";
 
-// const PRODUCTOS = [{ id_product: "01", category:"Anillos" ,name: "Anillo Azul", description: "Anillo Azul", price: "$100", img:"src/resources/img/Products/Pulceras/PulceraLimon.jpeg" }];
-// const IMAGE = "src/resources/img/Products/Pulceras/PulceraLimon.jpeg";
-
 function Item(props) {
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   return (
-    <Center py={12} minW={300} key={props.id}>
+    <Center py={12} minW={300} >
       <Box
         role={"group"}
         p={6}
