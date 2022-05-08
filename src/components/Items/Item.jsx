@@ -19,8 +19,9 @@ import { BsCart } from "react-icons/bs";
 function Item(props) {
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   return (
-    <Center py={12} minW={300} >
+    <Center>
       <Box
+        minW={300}
         role={"group"}
         p={6}
         maxW={"330px"}
@@ -33,9 +34,8 @@ function Item(props) {
       >
         <Box
           rounded={"lg"}
-          mt={-12}
           pos={"relative"}
-          height={"230px"}
+          height={"240px"}
           _after={{
             transition: "all .3s ease",
             content: '""',

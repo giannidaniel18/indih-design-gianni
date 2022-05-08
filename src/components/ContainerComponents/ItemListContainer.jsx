@@ -61,7 +61,7 @@ const PRODUCTOS = [
     img: "./src/resources/img/Products/Pulseras/pulseraroja4.jpeg",
   },
   {
-    id_product: "0",
+    id_product: "08",
     category: "Straps",
     name: "Strap smile",
     description: "Pulsera Roja",
@@ -99,6 +99,12 @@ function ItemListContainer() {
     >
       {loading ? (
         <>
+          <GridItem>
+            <ItemSkeleton />
+          </GridItem>
+          <GridItem>
+            <ItemSkeleton />
+          </GridItem>
           <GridItem>
             <ItemSkeleton />
           </GridItem>

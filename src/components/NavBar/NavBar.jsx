@@ -259,7 +259,7 @@ function NavBar() {
           direction={"row"}
           spacing={6}
         >
-          <Stack direction={"row"} spacing={-3}>
+          <Stack direction={"row"} >
             <ColorModeWidget />
             <CartWidget />
           </Stack>

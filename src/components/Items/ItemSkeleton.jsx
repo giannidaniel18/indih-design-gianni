@@ -4,16 +4,24 @@ import React from "react";
 export default function ItemSkeleton() {
   return (
     <Stack
+      minW={230}
+      maxW={"330px"}
       mt={10}
-      role={"group"}
+      mx={"auto"}
       p={6}
       boxShadow={"2xl"}
       rounded={"lg"}
-      pos={"relative"}
-      width={"330px"}
+      width={"100%"}
     >
       <Stack>
-        <Skeleton height="250px" mb={4} mt={-10} w="280px" borderRadius="lg" />
+        <Skeleton
+          height="250px"
+          mb={4}
+          mt={-10}
+          w="230px"
+          borderRadius="lg"
+          alignSelf="center"
+        />
         <Skeleton
           height="20px"
           width={"100px"}
