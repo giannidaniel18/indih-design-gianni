@@ -28,6 +28,12 @@ export default function ItemCount({ stock, initial, onAdd }) {
   const restarContador = () => {
     contador == 0 ? "" : setContador(contador - 1);
   };
+
+  const addToCart = () => {
+      onAdd(contador)
+  }
+
+
   return (
     <>
       <Stack mt={5} direction={"row"} justifyContent={"space-between"}>
@@ -52,7 +58,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
         />
       </Stack>
       <Stack direction={"row"} justify={"center"}>
-        <Button bg="primary" variant="solid" w={"100%"} mt={3}>
+        <Button disabled= {contador == 0 ? true : false} bg="primary" variant="solid" w={"100%"} mt={3} onClick={addToCart}>
           Add to cart
           <Icon ml={1} as={BsCart} />
         </Button>

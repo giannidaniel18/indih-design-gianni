@@ -67,7 +67,7 @@ function Item(props) {
             </Text>
           </Stack>
         </Stack>
-        <ItemCount stock={props.stock} initial={0} />
+        <ItemCount stock={props.stock} initial={0} onAdd={(cantidad) => console.log(`añadiendo ${cantidad} items de ${props.name}  `)} />
       </Box>
     </Center>
   );
