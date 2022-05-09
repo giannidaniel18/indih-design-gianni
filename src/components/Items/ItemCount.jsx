@@ -58,7 +58,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
         />
       </Stack>
       <Stack direction={"row"} justify={"center"}>
-        <Button disabled= {contador == 0 ? true : false} bg="primary" variant="solid" w={"100%"} mt={3} onClick={addToCart}>
+        <Button isDisabled= {contador == 0 ? true : false} bg="primary" variant="solid" w={"100%"} mt={3} onClick={addToCart}>
           Add to cart
           <Icon ml={1} as={BsCart} />
         </Button>
