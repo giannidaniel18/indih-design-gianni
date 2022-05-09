@@ -1,4 +1,4 @@
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import ItemCount from "./ItemCount";
 import {
   Box,
   Center,
@@ -7,21 +7,13 @@ import {
   Text,
   Stack,
   Image,
-  IconButton,
-  PinInputField,
-  PinInput,
-  Button,
-  Icon,
 } from "@chakra-ui/react";
 
-import { BsCart } from "react-icons/bs";
-
 function Item(props) {
-  const addToCartColors = useColorModeValue("primaryDark", "primary");
   return (
     <Center>
       <Box
-        minW={300}
+        minW={230}
         role={"group"}
         p={6}
         maxW={"330px"}
@@ -73,39 +65,9 @@ function Item(props) {
             <Text fontWeight={800} fontSize={"xl"}>
               {props.price}
             </Text>
-            {/* <Text textDecoration={"line-through"} color={"gray.600"}>
-              $199
-            </Text> */}
           </Stack>
         </Stack>
-        <Stack mt={5} direction={"row"} justifyContent={"space-between"}>
-          <IconButton
-            variant="outline"
-            borderColor={addToCartColors}
-            color={addToCartColors}
-            aria-label="Send email"
-            icon={<MinusIcon />}
-          />
-          <PinInput defaultValue="0">
-            <PinInputField
-              borderColor={addToCartColors}
-              color={addToCartColors}
-            />
-          </PinInput>
-          <IconButton
-            variant="outline"
-            borderColor={addToCartColors}
-            color={addToCartColors}
-            aria-label="Send email"
-            icon={<AddIcon />}
-          />
-        </Stack>
-        <Stack direction={"row"} justify={"center"}>
-          <Button bg="primary" variant="solid" w={"100%"} mt={3}>
-            Add to cart
-            <Icon ml={1} as={BsCart} />
-          </Button>
-        </Stack>
+        <ItemCount stock={props.stock} initial={0} />
       </Box>
     </Center>
   );

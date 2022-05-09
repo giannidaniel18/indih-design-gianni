@@ -11,6 +11,7 @@ const PRODUCTOS = [
     description: "Anillo Azul",
     price: "$100",
     img: "./src/resources/img/Products/Anillos/anillo1.jpeg",
+    stock: 10
   },
   {
     id_product: "02",
@@ -19,6 +20,7 @@ const PRODUCTOS = [
     description: "Collar Azul y blanco",
     price: "$150",
     img: "./src/resources/img/Products/Collares/collarazulyblanco1.jpeg",
+    stock: 10
   },
   {
     id_product: "03",
@@ -27,6 +29,7 @@ const PRODUCTOS = [
     description: "Collar Bostero",
     price: "$150",
     img: "./src/resources/img/Products/Collares/collarbostero2.jpeg",
+    stock: 10
   },
   {
     id_product: "04",
@@ -35,6 +38,7 @@ const PRODUCTOS = [
     description: "Pulsera Frutilla",
     price: "$150",
     img: "./src/resources/img/Products/Pulseras/pulserafrutilla1.jpeg",
+    stock: 8
   },
   {
     id_product: "05",
@@ -43,6 +47,7 @@ const PRODUCTOS = [
     description: "Pulsera Limon",
     price: "$250",
     img: "./src/resources/img/Products/Pulseras/pulseralimon2.jpeg",
+    stock: 0
   },
   {
     id_product: "06",
@@ -51,6 +56,7 @@ const PRODUCTOS = [
     description: "Pulsera Pomelo",
     price: "$250",
     img: "./src/resources/img/Products/Pulseras/pulserapomelo3.jpeg",
+    stock: 9
   },
   {
     id_product: "07",
@@ -59,6 +65,7 @@ const PRODUCTOS = [
     description: "Pulsera Roja",
     price: "$250",
     img: "./src/resources/img/Products/Pulseras/pulseraroja4.jpeg",
+    stock: 10
   },
   {
     id_product: "08",
@@ -67,13 +74,14 @@ const PRODUCTOS = [
     description: "Pulsera Roja",
     price: "$250",
     img: "./src/resources/img/Products/Straps/strapblancoycaritas.jpeg",
+    stock: 5
   },
 ];
 
 const getFech = new Promise((resolve) => {
   setTimeout(() => {
     resolve(PRODUCTOS);
-  }, 4000);
+  }, 2000);
 });
 
 function ItemListContainer() {
@@ -89,6 +97,7 @@ function ItemListContainer() {
 
   return (
     <Grid
+      mt={5}
       templateColumns={{
         base: "repeat(1, 1fr)",
         md: "repeat(2, 1fr)",
@@ -132,6 +141,7 @@ function ItemListContainer() {
               category={prod.category}
               price={prod.price}
               img={prod.img}
+              stock ={prod.stock}
             />
           </GridItem>
         ))
