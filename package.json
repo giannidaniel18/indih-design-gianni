@@ -1,11 +1,13 @@
 {
+  "homepage": "https://giannidaniel18.github.io/indih-design-gianni",
   "name": "indih-design-gianni",
   "private": true,
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy" : "gh-pages -d build"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
