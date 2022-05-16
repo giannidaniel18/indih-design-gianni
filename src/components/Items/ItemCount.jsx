@@ -6,6 +6,7 @@ import {
   Icon,
   useColorModeValue,
   Text,
+  Box,
 } from "@chakra-ui/react";
 import { BsCart } from "react-icons/bs";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
@@ -33,35 +34,56 @@ export default function ItemCount({ stock, initial, onAdd }) {
   };
 
   return (
-    <>
-      <Stack mt={5} direction={"row"} justifyContent={"space-evenly"} alignItems={'center'}>
+    <Stack
+      direction={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      id={"piajk"}
+     
+    >
+      <Stack
+        
+        borderRadius={10}
+        direction={"row"}
+        alignItems={"center"}
+        border={"groove 1px"}
+        borderColor={"primary"}
+      >
         <IconButton
+          border={0}
           variant="outline"
           borderColor={addToCartColors}
           color={addToCartColors}
           aria-label="Send email"
           icon={<MinusIcon />}
+          _active={useColorModeValue("none", "none")}
+          _focus={useColorModeValue("none", "none")}
+          _hover={useColorModeValue("none", "none")}
           onClick={restarContador}
         />
 
-        <Text fontWeight={"bold"} fontSize={25} m={0}>{contador}</Text>
+        <Text fontSize={23}>{contador}</Text>
 
         <IconButton
+          border={0}
           variant="outline"
           borderColor={addToCartColors}
           color={addToCartColors}
           aria-label="Send email"
           icon={<AddIcon />}
+          _active={useColorModeValue("none", "none")}
+          _focus={useColorModeValue("none", "none")}
+          _hover={useColorModeValue("none", "none")}
           onClick={sumarContador}
         />
       </Stack>
       <Stack direction={"row"} justify={"center"}>
         <Button
           isDisabled={contador == 0 ? true : false}
+          borderRadius={60}
           bg="primary"
           variant="solid"
-          w={"100%"}
-          mt={3}
+          w={{base : "100%" ,lg:"300px"}}
           onClick={addToCart}
           _hover={"none"}
         >
@@ -69,12 +91,12 @@ export default function ItemCount({ stock, initial, onAdd }) {
             "Sin Stock"
           ) : (
             <>
-              Add to cart
+             Agregar al carrito
               <Icon ml={1} as={BsCart} />
             </>
           )}
         </Button>
       </Stack>
-    </>
+    </Stack>
   );
 }

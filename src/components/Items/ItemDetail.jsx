@@ -9,66 +9,77 @@ import {
   Heading,
   SimpleGrid,
   useColorModeValue,
-  Select
+  Select,
+  StackDivider,
+  Divider,
+  Icon,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import ItemCount from "./ItemCount";
+import { BsFillCreditCardFill, BsCash } from "react-icons/bs";
 
-export default function ItemDetail({prod}) {
+export default function ItemDetail({ prod }) {
+  const precioEfectivo = Math.trunc(parseInt(prod.price) / 1.15);
+  const cuotas = Math.trunc(parseInt(prod.price) / 3) ;
+
   return (
-    <Container maxW={"2xl"} mt={10}  >
+    <Container maxW={"5xl"} mt={10}>
       <SimpleGrid
-        bg={useColorModeValue("gray.200", "gray.800")}
-        borderRadius={{ base: 20, md: 40 }}
+        bg={useColorModeValue("gray.100", "gray.800")}
         columns={{ base: 1, md: 2 }}
-        spacing={{ base: 8, md: 5 }}
+        spacing={{ base: 10, md: 5 }}
         py={{ base: 18, md: 22 }}
-        px={{ base: 10, md: 18 }}
+        px={{ base: 2, md: 18 }}
       >
-        <Flex  justifyContent={"center"} >
+        <Flex justifyContent={"center"}>
           <Image
-           alignSelf={"center"}
+            alignSelf={"center"}
+            minW={"300px"}
             rounded={"md"}
             alt={"product image"}
             src={prod.img}
             fit={"cover"}
             align={"center"}
-            minWidth={"200px"}
-            w={{ base: "250px",  md: "300px",  lg: "300px" }}
-            h={{ base: "250Px", md: "300px",  lg: "300px" }}
+            
+            w={{ base: "300px", md: "500px", lg: "500px" }}
+            h={{ base: "300px", md: "450px", lg: "450px" }}
           />
-          
         </Flex>
 
-        <Stack spacing={{ base: 2, md: 2}}  id="texto" >
-          <Box as={"header"} justifyContent={"center"} >
+        <Stack spacing={{ base: 2, md: 5 }} id="texto" >
+          <Stack  justifyContent={"center"}>
             <Heading
-              lineHeight={1.1}
+              lineHeight={1}
               fontWeight={600}
-              fontSize={{ base: "lg", sm: "xl", lg: "2xl" }}
+              fontSize={{ base: "lg", sm: "xl", lg: "3xl" }}
             >
               {prod.name}
             </Heading>
             <Text
               color={useColorModeValue("gray.900", "gray.400")}
-              fontWeight={300}
+              fontWeight={"bold"}
               fontSize={{ base: "md", sm: "md", lg: "lg" }}
             >
-              {prod.price}
+              ${prod.price}
             </Text>
-          </Box>
+            <Stack direction={"row"} alignItems={"center"}>
+              <Icon color={useColorModeValue("primaryDark", "primary")} as={BsCash} mt={{ base: "-25px", sm: "0" }} />
+              <Text>
+                ${precioEfectivo} Abonando en efectivo o transferencia bancaria
+              </Text>
+            </Stack>
+            <Stack direction={"row"} alignItems={"center"}>
+              <Icon color={useColorModeValue("primaryDark", "primary")} as={BsFillCreditCardFill} />
+              <Text> 3 cuotas sin interés de ${cuotas}</Text>
+            </Stack>
+          </Stack>
 
-          <Stack 
-            spacing={{ base: 2, sm: 2 }}
-            direction={"column"}
-            
-          >
-            <VStack spacing={{ base: 4, sm: 6 }} align="left" >
+          <Stack spacing={{ base: 5, sm: 8}} direction={"column"}>
+            <VStack spacing={{ base: 4, sm: 6 }} align="left">
               <Text
-                color={useColorModeValue("gray.500", "gray.400")}
+                color={useColorModeValue("secondaryDark", "secondaryLight")}
                 fontSize={{ base: "md", sm: "md", lg: "lg" }}
                 fontWeight={"300"}
-                
               >
                 {prod.description}
               </Text>
@@ -90,14 +101,19 @@ export default function ItemDetail({prod}) {
                 <option value="L">L</option>
               </Select>
             </Box>
-            
           </Stack>
+    
+          <ItemCount
+            stock={prod.stock}
+            initial={0}
+            onAdd={(cantidad) =>
+              console.log(`añadiendo ${cantidad} items de ${props.name}`)
+            }
+          />
 
-          <ItemCount stock={prod.stock} initial={0} onAdd={(cantidad) => console.log(`añadiendo ${cantidad} items de ${props.name}`)} />
-
-          <Stack direction="row" alignItems="center" justifyContent={"center"}>
+          <Stack direction="row" alignItems="center" >
             <MdLocalShipping />
-            <Text>2-3 Dias habiles para envios</Text>
+            <Text>2-3 Dias hábiles para envíos</Text>
           </Stack>
         </Stack>
       </SimpleGrid>
