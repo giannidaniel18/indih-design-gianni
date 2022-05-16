@@ -7,7 +7,9 @@ import {
   Text,
   Stack,
   Image,
+  Button
 } from "@chakra-ui/react";
+import ItemDetailButton from "./ItemDetailButton";
 
 function Item(props) {
   
@@ -68,7 +70,7 @@ function Item(props) {
             </Text>
           </Stack>
         </Stack>
-        <ItemCount stock={props.stock} initial={0} onAdd={(cantidad) => console.log(`añadiendo ${cantidad} items de ${props.name}  `)} />
+        <ItemDetailButton id={props.id}/>
       </Box>
     </Center>
   );

@@ -7,11 +7,19 @@ export default function ColorModeWidget() {
   return (
     <>
       {colorMode === "light" ? (
-        <Button onClick={toggleColorMode} _focus={{ style: "none" }} variant="unstyled">
+        <Button
+          onClick={toggleColorMode}
+          _focus={{ style: "none" }}
+          variant="unstyled"
+        >
           <MoonIcon />
         </Button>
       ) : (
-        <Button onClick={toggleColorMode} _focus={{ style: "none" }} variant="unstyled">
+        <Button
+          onClick={toggleColorMode}
+          _focus={{ style: "none" }}
+          variant="unstyled"
+        >
           <SunIcon />
         </Button>
       )}

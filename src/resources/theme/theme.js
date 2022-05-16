@@ -17,8 +17,8 @@ export default extendTheme({
   },
   styles: {
     global: (props) => ({
-      "html, body, #root": {
-        backgroundColor: mode("gray.100", undefined)(props),
+      "html, body, #root , App": {
+        backgroundColor: mode("gray.100", undefined)(props)
       },
     }),
   },

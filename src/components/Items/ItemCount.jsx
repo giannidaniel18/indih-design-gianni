@@ -11,7 +11,6 @@ import { BsCart } from "react-icons/bs";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
 export default function ItemCount({ stock, initial, onAdd }) {
-    
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   const [contador, setContador] = useState(initial);
 
@@ -29,14 +28,13 @@ export default function ItemCount({ stock, initial, onAdd }) {
   const restarContador = () => {
     contador == 0 ? "" : setContador(contador - 1);
   };
-
   const addToCart = () => {
     onAdd(contador);
   };
 
   return (
     <>
-      <Stack mt={5} direction={"row"} justifyContent={"space-between"}>
+      <Stack mt={5} direction={"row"} justifyContent={"space-evenly"} alignItems={'center'}>
         <IconButton
           variant="outline"
           borderColor={addToCartColors}
@@ -46,7 +44,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
           onClick={restarContador}
         />
 
-        <Text fontWeight={"bold"}>{contador}</Text>
+        <Text fontWeight={"bold"} fontSize={25} m={0}>{contador}</Text>
 
         <IconButton
           variant="outline"
@@ -65,9 +63,16 @@ export default function ItemCount({ stock, initial, onAdd }) {
           w={"100%"}
           mt={3}
           onClick={addToCart}
+          _hover={"none"}
         >
-          {stock == 0 ? "Sin Stock" : "Add to cart"}
-          <Icon ml={1} as={BsCart} />
+          {stock == 0 ? (
+            "Sin Stock"
+          ) : (
+            <>
+              Add to cart
+              <Icon ml={1} as={BsCart} />
+            </>
+          )}
         </Button>
       </Stack>
     </>

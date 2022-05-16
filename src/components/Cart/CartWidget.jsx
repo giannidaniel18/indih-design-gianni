@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Center, Flex, Stack , Text} from "@chakra-ui/react";
+import { Icon, Center, Flex, Stack , Text, Badge} from "@chakra-ui/react";
 import { BsCart } from "react-icons/bs";
 
 export default function CartWidget() {
@@ -7,7 +7,7 @@ export default function CartWidget() {
  
      <Stack direction={"row"}  alignItems={"center"} justifyContent={"center"}>
         <Icon as={BsCart} />
-        <Text color >2</Text>  
+        <Badge borderRadius={"50%"}  colorScheme='purple'>2</Badge>
       
      </Stack>
       

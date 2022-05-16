@@ -1,3 +1,4 @@
+import { Link as ReactLink } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -22,7 +23,8 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import ColorModeWidget from "../ColorModeWidget/ColorModeWidget";
-import CartWidget from "../CartWidget/CartWidget";
+import CartWidget from "../Cart/CartWidget";
+import "./NavBar.css";
 
 const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("primaryDark", "primaryDark");
@@ -74,7 +76,8 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
-      href={href}
+      as={ReactLink}
+      to={href}
       role={"group"}
       display={"block"}
       p={2}
@@ -137,6 +140,7 @@ const MobileNavItem = ({ label, children, href }) => {
           textDecoration: "none",
         }}
       >
+        
         <Text
           fontWeight={600}
           color={useColorModeValue("gray.600", "gray.200")}
@@ -165,7 +169,12 @@ const MobileNavItem = ({ label, children, href }) => {
         >
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link
+                key={child.label}
+                py={2}
+                as={ReactLink}
+                to={child.href}
+              >
                 {child.label}
               </Link>
             ))}
@@ -178,29 +187,30 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "Inicio",
+    href: "/",
   },
   {
     label: "Productos",
     children: [
       {
         label: "Holders",
-        href: "#",
+        href: "productos/Holders",
       },
       {
         label: "Straps",
-        href: "#",
+        href: "productos/Straps",
       },
       {
-        label: "pulceras",
-        href: "#",
+        label: "Pulseras",
+        href: "productos/Pulseras",
       },
       {
         label: "Collares",
-        href: "#",
+        href: "productos/Collares",
       },
       {
         label: "Anillos",
-        href: "#",
+        href: "productos/Anillos",
       },
     ],
   },
@@ -214,9 +224,11 @@ function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
+    <Box className="navStick" zIndex={2} >
       <Flex
-        bg={useColorModeValue("gray.100", undefined)}
+        
+        
+        bg={useColorModeValue("gray.100", "gray.800")}
         color={useColorModeValue("gray.500", "gray.200")}
         minH={"60px"}
         py={{ base: 2 }}
@@ -259,7 +271,7 @@ function NavBar() {
           direction={"row"}
           spacing={6}
         >
-          <Stack direction={"row"} >
+          <Stack direction={"row"}>
             <ColorModeWidget />
             <CartWidget />
           </Stack>
