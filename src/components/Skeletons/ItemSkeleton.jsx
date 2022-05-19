@@ -1,4 +1,4 @@
-import { Center, Skeleton, Stack, Box, Image } from "@chakra-ui/react";
+import { Skeleton, Stack } from "@chakra-ui/react";
 import React from "react";
 
 export default function ItemSkeleton() {

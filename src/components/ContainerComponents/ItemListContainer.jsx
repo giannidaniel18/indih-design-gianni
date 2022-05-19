@@ -1,7 +1,7 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import Item from "../Items/Item";
 import { useEffect, useState } from "react";
-import ItemSkeleton from "../Items/ItemSkeleton";
+import ItemSkeleton from "../Skeletons/ItemSkeleton";
 import { useParams } from "react-router-dom";
 import { getFetch } from "../../helpers/getFetch";
 
@@ -39,6 +39,7 @@ function ItemListContainer() {
         lg: "repeat(3, 5fr)",
         xl: "repeat(4, 3fr)",
       }}
+      
       gap={2}
     >
       {loading ? (
@@ -59,13 +60,8 @@ function ItemListContainer() {
       ) : (
         productos.map((prod) => (
           <GridItem key={prod.id_product} w="100%" >
-            <Item
-              name={prod.name}
-              category={prod.category}
-              price={prod.price}
-              img={prod.img}
-              stock={prod.stock}
-              id={prod.id_product}
+            <Item prod={prod}
+              
             />
           </GridItem>
         ))

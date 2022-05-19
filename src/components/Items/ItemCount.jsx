@@ -85,7 +85,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
           variant="solid"
           w={{base : "100%" ,lg:"300px"}}
           onClick={addToCart}
-          _hover={"none"}
+          _hover={{}}
         >
           {stock == 0 ? (
             "Sin Stock"

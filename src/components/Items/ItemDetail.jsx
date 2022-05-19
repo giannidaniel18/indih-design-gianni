@@ -10,8 +10,6 @@ import {
   SimpleGrid,
   useColorModeValue,
   Select,
-  StackDivider,
-  Divider,
   Icon,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
@@ -51,14 +49,14 @@ export default function ItemDetail({ prod }) {
             <Heading
               lineHeight={1}
               fontWeight={600}
-              fontSize={{ base: "lg", sm: "xl", lg: "3xl" }}
+              fontSize={{ base: "2xl", md: "3xl" }}
             >
               {prod.name}
             </Heading>
             <Text
               color={useColorModeValue("gray.900", "gray.400")}
               fontWeight={"bold"}
-              fontSize={{ base: "md", sm: "md", lg: "lg" }}
+              fontSize={{ base: "xl", md: "2xl" }}
             >
               ${prod.price}
             </Text>
@@ -70,7 +68,7 @@ export default function ItemDetail({ prod }) {
             </Stack>
             <Stack direction={"row"} alignItems={"center"}>
               <Icon color={useColorModeValue("primaryDark", "primary")} as={BsFillCreditCardFill} />
-              <Text> 3 cuotas sin interés de ${cuotas}</Text>
+              <Text> 3 cuotas sin interés de ${cuotas} </Text>
             </Stack>
           </Stack>
 
@@ -107,7 +105,7 @@ export default function ItemDetail({ prod }) {
             stock={prod.stock}
             initial={0}
             onAdd={(cantidad) =>
-              console.log(`añadiendo ${cantidad} items de ${props.name}`)
+              console.log(`añadiendo ${cantidad} items de ${prod.name}`)
             }
           />
 

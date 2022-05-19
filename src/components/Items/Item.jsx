@@ -13,6 +13,7 @@ import ItemDetailButton from "./ItemDetailButton";
 
 function Item(props) {
   
+  
   return (
     <Center>
       <Box
@@ -39,7 +40,7 @@ function Item(props) {
             pos: "absolute",
             top: 5,
             left: 0,
-            backgroundImage: `url(${props.img})`,
+            backgroundImage: `url(${props.prod.img})`,
             filter: "blur(15px)",
             zIndex: -1,
           }}
@@ -54,23 +55,23 @@ function Item(props) {
             height={250}
             width={282}
             objectFit={"cover"}
-            src={props.img}
+            src={props.prod.img}
           />
         </Box>
         <Stack pt={10} align={"center"}>
           <Text color={"gray.500"} fontSize={"sm"} textTransform={"uppercase"}>
-            {props.category}
+            {props.prod.category}
           </Text>
           <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
-            {props.name}
+            {props.prod.name}
           </Heading>
           <Stack direction={"row"} align={"center"}>
             <Text fontWeight={800} fontSize={"xl"}>
-              {props.price}
+              ${props.prod.price}
             </Text>
           </Stack>
         </Stack>
-        <ItemDetailButton id={props.id}/>
+        <ItemDetailButton id={props.prod.id_product}/>
       </Box>
     </Center>
   );
