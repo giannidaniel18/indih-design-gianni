@@ -6,6 +6,7 @@ const productos = [
     description: "Anillo Azul Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ut autem quas accusamus beatae perferendis voluptas",
     price: "100",
     img: "/assets/img/products/anillos/anillo1.jpeg",
+    url: "https://i.ibb.co/58WhWHd/anillo1.jpg",
     stock: 10,
   },
   {
@@ -15,6 +16,7 @@ const productos = [
     description: " Collar Azul y blanco loremx Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ",
     price: "150",
     img: "/assets/img/products/collares/collarazulyblanco1.jpeg",
+    url: "https://i.ibb.co/wYfhP7t/collarazulyblanco1.jpg",
     stock: 10,
   },
   {
@@ -24,6 +26,7 @@ const productos = [
     description: "Collar Bostero",
     price: "150",
     img: "/assets/img/products/collares/collarbostero2.jpeg",
+    url: "https://i.ibb.co/zmNFYzY/collarbostero2.jpg",
     stock: 10,
   },
   {
@@ -33,6 +36,7 @@ const productos = [
     description: "Pulsera Frutilla Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ut autem quas accusamus beatae perferendis voluptas",
     price: "150",
     img: "/assets/img/products/pulseras/pulserafrutilla1.jpeg",
+    url: "https://i.ibb.co/n8yHWCB/pulserafrutilla1.jpg",
     stock: 8,
   },
   {
@@ -42,6 +46,7 @@ const productos = [
     description: "Pulsera Limon Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ut autem quas accusamus beatae perferendis voluptas",
     price: "250",
     img: "/assets/img/products/pulseras/pulseralimon2.jpeg",
+    url: "https://i.ibb.co/TKyJCQp/pulseralimon2.jpg",
     stock: 0,
   },
   {
@@ -51,6 +56,7 @@ const productos = [
     description: "Pulsera Pomelo Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ut autem quas accusamus beatae perferendis voluptas",
     price: "250",
     img: "/assets/img/products/pulseras/pulserapomelo3.jpeg",
+    url: "https://i.ibb.co/HYtysBx/pulserapomelo3.jpg",
     stock: 9,
   },
   {
@@ -60,6 +66,7 @@ const productos = [
     description: "Pulsera Roja Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ut autem quas accusamus beatae perferendis voluptas",
     price: "250",
     img: "/assets/img/products/pulseras/pulseraroja4.jpeg",
+    url: "https://i.ibb.co/RvMhFSK/pulseraroja4.jpg",
     stock: 10,
   },
   {
@@ -69,6 +76,7 @@ const productos = [
     description: "Pulsera Roja Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ut autem quas accusamus beatae perferendis voluptas" ,
     price: "250",
     img: "/assets/img/products/straps/strapblancoycaritas.jpeg",
+    url: "https://i.ibb.co/TR18vQz/strapblancoycaritas.jpg",
     stock: 5,
   },
 ];

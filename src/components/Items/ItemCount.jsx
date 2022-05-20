@@ -16,6 +16,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
   const [contador, setContador] = useState(initial);
 
   const sumarContador = () => {
+   
     if (stock > 0) {
       if (contador == stock) {
         return contador;
@@ -30,7 +31,8 @@ export default function ItemCount({ stock, initial, onAdd }) {
     contador == 0 ? "" : setContador(contador - 1);
   };
   const addToCart = () => {
-    onAdd(contador);
+    onAdd(contador)
+  
   };
 
   return (
@@ -38,7 +40,6 @@ export default function ItemCount({ stock, initial, onAdd }) {
       direction={"row"}
       justifyContent={"space-between"}
       alignItems={"center"}
-      id={"piajk"}
      
     >
       <Stack

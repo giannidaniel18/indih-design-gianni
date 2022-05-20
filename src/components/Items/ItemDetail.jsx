@@ -16,9 +16,18 @@ import { MdLocalShipping } from "react-icons/md";
 import ItemCount from "./ItemCount";
 import { BsFillCreditCardFill, BsCash } from "react-icons/bs";
 
+import {useCartContext} from '../../context/CartContext' 
+
 export default function ItemDetail({ prod }) {
   const precioEfectivo = Math.trunc(parseInt(prod.price) / 1.15);
   const cuotas = Math.trunc(parseInt(prod.price) / 3) ;
+
+  const {addToCart} = useCartContext()
+
+  const onAdd = (cantidad) => {
+    addToCart({...prod,cantidad})
+    
+  }
 
   return (
     <Container maxW={"5xl"} mt={10}>
@@ -35,7 +44,7 @@ export default function ItemDetail({ prod }) {
             minW={"300px"}
             rounded={"md"}
             alt={"product image"}
-            src={prod.img}
+            src={prod.url}
             fit={"cover"}
             align={"center"}
             
@@ -104,9 +113,7 @@ export default function ItemDetail({ prod }) {
           <ItemCount
             stock={prod.stock}
             initial={0}
-            onAdd={(cantidad) =>
-              console.log(`añadiendo ${cantidad} items de ${prod.name}`)
-            }
+            onAdd={onAdd}
           />
 
           <Stack direction="row" alignItems="center" >
