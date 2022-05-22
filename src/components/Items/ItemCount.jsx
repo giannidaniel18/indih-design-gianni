@@ -16,7 +16,6 @@ export default function ItemCount({ stock, initial, onAdd }) {
   const [contador, setContador] = useState(initial);
 
   const sumarContador = () => {
-   
     if (stock > 0) {
       if (contador == stock) {
         return contador;
@@ -30,9 +29,9 @@ export default function ItemCount({ stock, initial, onAdd }) {
   const restarContador = () => {
     contador == 0 ? "" : setContador(contador - 1);
   };
-  const addToCart = () => {
-    onAdd(contador)
   
+  const addToCart = () => {
+    onAdd(contador);
   };
 
   return (
@@ -40,10 +39,8 @@ export default function ItemCount({ stock, initial, onAdd }) {
       direction={"row"}
       justifyContent={"space-between"}
       alignItems={"center"}
-     
     >
       <Stack
-        
         borderRadius={10}
         direction={"row"}
         alignItems={"center"}
@@ -84,7 +81,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
           borderRadius={60}
           bg="primary"
           variant="solid"
-          w={{base : "100%" ,lg:"300px"}}
+          w={{ base: "100%", lg: "300px" }}
           onClick={addToCart}
           _hover={{}}
         >
@@ -92,7 +89,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
             "Sin Stock"
           ) : (
             <>
-             Agregar al carrito
+              Agregar al carrito
               <Icon ml={1} as={BsCart} />
             </>
           )}

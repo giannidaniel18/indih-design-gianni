@@ -25,10 +25,13 @@ import {
 import ColorModeWidget from "../ColorModeWidget/ColorModeWidget";
 import CartWidget from "../Cart/CartWidget";
 import "./NavBar.css";
+import { useCartContext } from "../../context/CartContext";
 
 const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("primaryDark", "primaryDark");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
+
+  
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -224,6 +227,8 @@ const NAV_ITEMS = [
 
 function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
+  const {cartBadge} = useCartContext()
+ 
 
   return (
     <Box className="navStick" zIndex={2} >
@@ -275,7 +280,7 @@ function NavBar() {
         >
           <Stack direction={"row"}>
             <ColorModeWidget />
-            <CartWidget />
+            <CartWidget cant={cartBadge} />
           </Stack>
           <Button
             as={"a"}

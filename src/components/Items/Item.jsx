@@ -13,7 +13,6 @@ import ItemDetailButton from "./ItemDetailButton";
 
 function Item(props) {
   
-  
   return (
     <Center>
       <Box
@@ -40,7 +39,7 @@ function Item(props) {
             pos: "absolute",
             top: 5,
             left: 0,
-            backgroundImage: `url(${props.prod.url})`,
+            backgroundImage: `url(${props.prod.img})`,
             filter: "blur(15px)",
             zIndex: -1,
           }}
@@ -55,7 +54,7 @@ function Item(props) {
             height={250}
             width={282}
             objectFit={"cover"}
-            src={props.prod.url}
+            src={props.prod.img}
           />
         </Box>
         <Stack pt={10} align={"center"}>

@@ -22,13 +22,16 @@ export default function ItemDetail({ prod }) {
   const precioEfectivo = Math.trunc(parseInt(prod.price) / 1.15);
   const cuotas = Math.trunc(parseInt(prod.price) / 3) ;
 
-  const {addToCart} = useCartContext()
+  const {addToCart, cartList,updateCartBadge } = useCartContext()
 
   const onAdd = (cantidad) => {
     addToCart({...prod,cantidad})
+   
     
   }
 
+
+  
   return (
     <Container maxW={"5xl"} mt={10}>
       <SimpleGrid
@@ -44,7 +47,7 @@ export default function ItemDetail({ prod }) {
             minW={"300px"}
             rounded={"md"}
             alt={"product image"}
-            src={prod.url}
+            src={prod.img}
             fit={"cover"}
             align={"center"}
             
