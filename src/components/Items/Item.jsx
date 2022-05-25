@@ -39,7 +39,7 @@ function Item(props) {
             pos: "absolute",
             top: 5,
             left: 0,
-            backgroundImage: `url(${props.prod.img})`,
+            backgroundImage: `url(${props.prod.url})`,
             filter: "blur(15px)",
             zIndex: -1,
           }}
@@ -54,7 +54,7 @@ function Item(props) {
             height={250}
             width={282}
             objectFit={"cover"}
-            src={props.prod.img}
+            src={props.prod.url}
           />
         </Box>
         <Stack pt={10} align={"center"}>

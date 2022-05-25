@@ -47,7 +47,7 @@ export default function ItemDetail({ prod }) {
             minW={"300px"}
             rounded={"md"}
             alt={"product image"}
-            src={prod.img}
+            src={prod.url}
             fit={"cover"}
             align={"center"}
             
