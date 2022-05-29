@@ -2,9 +2,9 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import ItemDetail from "../Items/ItemDetail";
 import { useParams } from "react-router-dom";
-import { getFetch } from "../../helpers/getFetch";
 import { useEffect, useState } from "react";
-import ItemDetailSkeleton from "../Skeletons/ItemDetailSkeleton";
+import ItemDetailSkeleton from "../OtherComponents/Skeletons/ItemDetailSkeleton";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 export default function ItemDetailContainer() {
   const [producto, setProducto] = useState({});
@@ -13,19 +13,24 @@ export default function ItemDetailContainer() {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      setLoading(true);
-      getFetch()
-        .then((respuesta) =>
-          setProducto(respuesta.find((prod) => prod.id_product === id))
-        )
+    const db = getFirestore();
+    if(id){
+      const dbQuery = doc(db, "productos", id);
+      getDoc(dbQuery)
+        .then(prod => setProducto({ id: prod.id, ...prod.data()}))
         .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
-    } else {
-      getFetch()
-        .then((respuesta) => setProducto(respuesta))
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
+        .finally(() => setLoading(false))
+    } else{
+      setProducto({
+        id_product: "N/A",
+        category: "N/A",
+        name: "N/A",
+        description: "N/A",
+        price: "N/A",
+        img: "N/A",
+        url: "N/A",
+        stock: "N/A",
+      },)
     }
   }, [id]);
 
@@ -34,7 +39,7 @@ export default function ItemDetailContainer() {
       {loading ? (
         <ItemDetailSkeleton />
       ) : (
-        <ItemDetail key={producto.id_product} prod={producto} />
+        <ItemDetail key={producto.id} prod={producto} />
       )}
     </Box>
   );

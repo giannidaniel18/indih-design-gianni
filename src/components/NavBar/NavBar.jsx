@@ -227,7 +227,9 @@ const NAV_ITEMS = [
 
 function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
-  const {cartBadge} = useCartContext()
+  const { getCartQty} = useCartContext()
+
+  const cartBadge = getCartQty()
  
 
   return (

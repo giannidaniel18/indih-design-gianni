@@ -84,10 +84,26 @@ const productos = [
 export const getFetch = (id) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const query = id
-        ? productos.find((producto) => producto.id === id)
-        : productos;
+      const query = id ? productos.find((producto) => producto.id === id) : productos;
       resolve(query);
     }, 2000);
   });
 };
+
+
+// useEffect(() => {
+  //   if (categoria) {
+  //     setLoading(true)
+  //     getFetch()
+  //       .then(respuesta => setProductos(respuesta.filter((prods) => prods.category === categoria)))
+  //       .catch((err) => console.log(err))
+  //       .finally(() => setLoading(false));
+  //   } else {
+
+  //     getFetch()
+  //       .then((respuesta) => setProductos(respuesta))
+  //       .catch((err) => console.log(err))
+  //       .finally(() => setLoading(false));
+  //   }
+
+  // }, [categoria]);

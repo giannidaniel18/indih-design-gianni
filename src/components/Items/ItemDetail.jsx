@@ -11,27 +11,53 @@ import {
   useColorModeValue,
   Select,
   Icon,
+  useToast,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import ItemCount from "./ItemCount";
 import { BsFillCreditCardFill, BsCash } from "react-icons/bs";
-
-import {useCartContext} from '../../context/CartContext' 
+import { useState } from "react";
+import { useCartContext } from "../../context/CartContext";
 
 export default function ItemDetail({ prod }) {
   const precioEfectivo = Math.trunc(parseInt(prod.price) / 1.15);
-  const cuotas = Math.trunc(parseInt(prod.price) / 3) ;
+  const cuotas = Math.trunc(parseInt(prod.price) / 3);
+  const [talle, setTalle] = useState("medium");
+  const { addToCart, cartList } = useCartContext();
+  const toast = useToast()
 
-  const {addToCart, cartList,updateCartBadge } = useCartContext()
+  const ElegirTalle = (e) => {
+    setTalle(e.target.value);
+  };
 
-  const onAdd = (cantidad) => {
-    addToCart({...prod,cantidad})
-   
-    
+  const onAdd = (cantidad, talle) => {
+    const index = cartList.findIndex((producto) => producto.id === prod.id);
+    if (index !== -1) {
+      if (cantidad + cartList[index].cantidad > prod.stock) {
+        alert("no se puede agregar mas items al carrito por falta de stock")
+      } else {
+        addToCart({ ...prod, cantidad, talle });
+        toastAddToCart(cantidad)
+      }
+    } else {
+      addToCart({ ...prod, cantidad, talle });
+      toastAddToCart(cantidad)
+    }
+  };
+
+  function toastAddToCart(contador) {
+    return (
+      toast({
+        position: 'top-right',duration:'800',
+        render: () => (
+          <Box color='white' p={3} mt={"50px"} borderRadius = 'lg' bg='primaryDark' >
+            <Text> {contador} {prod.name} agregados al carrito</Text>
+          </Box>
+        ),
+      })
+    )
   }
 
-
-  
   return (
     <Container maxW={"5xl"} mt={10}>
       <SimpleGrid
@@ -47,17 +73,16 @@ export default function ItemDetail({ prod }) {
             minW={"300px"}
             rounded={"md"}
             alt={"product image"}
-            src={prod.url}
+            src={prod.urlimg}
             fit={"cover"}
             align={"center"}
-            
             w={{ base: "300px", md: "500px", lg: "500px" }}
             h={{ base: "300px", md: "450px", lg: "450px" }}
           />
         </Flex>
 
-        <Stack spacing={{ base: 2, md: 5 }} id="texto" >
-          <Stack  justifyContent={"center"}>
+        <Stack spacing={{ base: 2, md: 5 }} id="texto">
+          <Stack justifyContent={"center"}>
             <Heading
               lineHeight={1}
               fontWeight={600}
@@ -73,18 +98,25 @@ export default function ItemDetail({ prod }) {
               ${prod.price}
             </Text>
             <Stack direction={"row"} alignItems={"center"}>
-              <Icon color={useColorModeValue("primaryDark", "primary")} as={BsCash} mt={{ base: "-25px", sm: "0" }} />
+              <Icon
+                color={useColorModeValue("primaryDark", "primary")}
+                as={BsCash}
+                mt={{ base: "-25px", sm: "0" }}
+              />
               <Text>
                 ${precioEfectivo} Abonando en efectivo o transferencia bancaria
               </Text>
             </Stack>
             <Stack direction={"row"} alignItems={"center"}>
-              <Icon color={useColorModeValue("primaryDark", "primary")} as={BsFillCreditCardFill} />
+              <Icon
+                color={useColorModeValue("primaryDark", "primary")}
+                as={BsFillCreditCardFill}
+              />
               <Text> 3 cuotas sin interés de ${cuotas} </Text>
             </Stack>
           </Stack>
 
-          <Stack spacing={{ base: 5, sm: 8}} direction={"column"}>
+          <Stack spacing={{ base: 5, sm: 8 }} direction={"column"}>
             <VStack spacing={{ base: 4, sm: 6 }} align="left">
               <Text
                 color={useColorModeValue("secondaryDark", "secondaryLight")}
@@ -105,21 +137,22 @@ export default function ItemDetail({ prod }) {
                 Medida
               </Text>
 
-              <Select placeholder="Elegí tu talle">
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
+              <Select placeholder="Elegí tu talle" onChange={ElegirTalle}>
+                <option value="small">S</option>
+                <option value="medium">M</option>
+                <option value="large">L</option>
               </Select>
             </Box>
           </Stack>
-    
+
           <ItemCount
             stock={prod.stock}
             initial={0}
             onAdd={onAdd}
+            talle={talle}
           />
 
-          <Stack direction="row" alignItems="center" >
+          <Stack direction="row" alignItems="center">
             <MdLocalShipping />
             <Text>2-3 Dias hábiles para envíos</Text>
           </Stack>

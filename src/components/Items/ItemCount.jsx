@@ -6,14 +6,15 @@ import {
   Icon,
   useColorModeValue,
   Text,
-  Box,
+  
 } from "@chakra-ui/react";
 import { BsCart } from "react-icons/bs";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
-export default function ItemCount({ stock, initial, onAdd }) {
+export default function ItemCount({ stock, initial, onAdd, talle}) {
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   const [contador, setContador] = useState(initial);
+ 
 
   const sumarContador = () => {
     if (stock > 0) {
@@ -29,10 +30,13 @@ export default function ItemCount({ stock, initial, onAdd }) {
   const restarContador = () => {
     contador == 0 ? "" : setContador(contador - 1);
   };
-  
   const addToCart = () => {
-    onAdd(contador);
+    onAdd(contador, talle);
   };
+
+  
+
+
 
   return (
     <Stack

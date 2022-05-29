@@ -6,14 +6,23 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Input,
   Button,
+  Stack,
+  Text,
+  Box,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
+import CartItem from "./CartItem";
 
 export default function CartDrawer({ btnRef, isOpen, onClose }) {
+  const { cartList, clearCartList, getTotalPrice } = useCartContext();
 
-  const { cartList, clearCartList } = useCartContext();
+  const cartTotalPrice = getTotalPrice();
 
   return (
     <>
@@ -30,14 +39,26 @@ export default function CartDrawer({ btnRef, isOpen, onClose }) {
           <DrawerHeader>Carrito de compra</DrawerHeader>
 
           <DrawerBody>
-            {cartList.map(prod => <li key={prod.id_product}> {prod.name} - {prod.cantidad} - {prod.price} </li>)}
+            <Stack justifyContent={"space-between"}>
+              {cartList.map((prod) => (
+                <CartItem key={prod.id} prod={prod} />
+              ))}
+              <Box alignSelf={"end"}>
+                <Stat>
+                  <StatLabel>Precio total del carrito</StatLabel>
+                  <StatNumber>$ {cartTotalPrice}</StatNumber>
+                </Stat>
+              </Box>
+            </Stack>
           </DrawerBody>
 
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={clearCartList}>
               Limpiar carrito
             </Button>
-            <Button colorScheme="blue">Finalizar compra</Button>
+            <Link to={"/cart"}>
+              <Button onClick={onClose} bg="primary">Finalizar compra</Button>
+            </Link>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

@@ -39,7 +39,7 @@ function Item(props) {
             pos: "absolute",
             top: 5,
             left: 0,
-            backgroundImage: `url(${props.prod.url})`,
+            backgroundImage: `url(${props.prod.urlimg})`,
             filter: "blur(15px)",
             zIndex: -1,
           }}
@@ -54,7 +54,7 @@ function Item(props) {
             height={250}
             width={282}
             objectFit={"cover"}
-            src={props.prod.url}
+            src={props.prod.urlimg}
           />
         </Box>
         <Stack pt={10} align={"center"}>
@@ -70,7 +70,7 @@ function Item(props) {
             </Text>
           </Stack>
         </Stack>
-        <ItemDetailButton id={props.prod.id_product}/>
+        <ItemDetailButton id={props.prod.id}/>
       </Box>
     </Center>
   );

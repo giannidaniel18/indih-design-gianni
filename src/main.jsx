@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import theme from './resources/theme/theme'
+import getFirestoreApp from './firebase/config'
+
+getFirestoreApp()
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,3 +16,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root'),
 )
+
