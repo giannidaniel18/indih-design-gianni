@@ -32,6 +32,7 @@ export default function ItemCount({ stock, initial, onAdd, talle}) {
   };
   const addToCart = () => {
     onAdd(contador, talle);
+    
   };
 
   

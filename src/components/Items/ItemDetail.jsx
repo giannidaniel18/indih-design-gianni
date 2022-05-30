@@ -12,14 +12,19 @@ import {
   Select,
   Icon,
   useToast,
+  useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import ItemCount from "./ItemCount";
 import { BsFillCreditCardFill, BsCash } from "react-icons/bs";
 import { useState } from "react";
 import { useCartContext } from "../../context/CartContext";
+import SimpleAlertDialog from "../OtherComponents/alert/SimpleAlertDialog";
+
 
 export default function ItemDetail({ prod }) {
+  const { isOpen, onOpen , onClose} = useDisclosure()
   const precioEfectivo = Math.trunc(parseInt(prod.price) / 1.15);
   const cuotas = Math.trunc(parseInt(prod.price) / 3);
   const [talle, setTalle] = useState("medium");
@@ -34,7 +39,7 @@ export default function ItemDetail({ prod }) {
     const index = cartList.findIndex((producto) => producto.id === prod.id);
     if (index !== -1) {
       if (cantidad + cartList[index].cantidad > prod.stock) {
-        alert("no se puede agregar mas items al carrito por falta de stock")
+       onOpen()  // alert("no se puede agregar mas items al carrito por falta de stock")
       } else {
         addToCart({ ...prod, cantidad, talle });
         toastAddToCart(cantidad)
@@ -142,6 +147,7 @@ export default function ItemDetail({ prod }) {
                 <option value="medium">M</option>
                 <option value="large">L</option>
               </Select>
+              { isOpen && <SimpleAlertDialog isOpen={isOpen} onClose={onClose} title={"Stock Insuficiente"} textbody={"Superaste el limite de Stock para el producto : " + prod.name} />}
             </Box>
           </Stack>
 
@@ -150,6 +156,8 @@ export default function ItemDetail({ prod }) {
             initial={0}
             onAdd={onAdd}
             talle={talle}
+            onOpen={onOpen}
+            
           />
 
           <Stack direction="row" alignItems="center">

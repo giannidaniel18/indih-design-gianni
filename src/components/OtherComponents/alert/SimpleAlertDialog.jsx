@@ -6,10 +6,10 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Button,
 } from "@chakra-ui/react";
 
-export default function StockAlertDialog(title, textbody) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export default function SimpleAlertDialog({title, textbody, isOpen, onClose}) {
   const cancelRef = React.useRef();
   return (
     <>
@@ -28,7 +28,7 @@ export default function StockAlertDialog(title, textbody) {
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
-                Cancel
+                OK
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

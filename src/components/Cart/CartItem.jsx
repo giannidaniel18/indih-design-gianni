@@ -6,20 +6,22 @@ import {
   Stack,
   Text,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { BsTrash } from "react-icons/bs";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useCartContext } from "../../context/CartContext";
+import SimpleAlertDialog from "../OtherComponents/alert/SimpleAlertDialog";
 
 
 export default function CartItem({ prod }) {
+  const { isOpen, onOpen , onClose} = useDisclosure()
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   const { deleteFromCart, updateCartItem } = useCartContext();
 
   const sumarContador = () => {
     if (prod.cantidad === prod.stock) {
-      alert("no se puede agregar mas items al carrito por falta de stock");
-     
+      onOpen() // alert("no se puede agregar mas items al carrito por falta de stock")
     } else {
       const cartItemToUpdate = { ...prod };
       cartItemToUpdate.cantidad++;
@@ -106,6 +108,7 @@ export default function CartItem({ prod }) {
             onClick={delteItem}
           />
           <Box> Precio total : ${prod.price * prod.cantidad}</Box>
+          { isOpen && <SimpleAlertDialog isOpen={isOpen} onClose={onClose} title={"Stock Insuficiente"} textbody={"Superaste el limite de Stock para el producto : " + prod.name} />}
         </Stack>
       </Stack>
     </Stack>
