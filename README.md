@@ -2,6 +2,7 @@ Proyecto react - Curso Coderhouse- Comisión 31165
 
 Sitio hosteado en : https://visionary-tapioca-0c3bdc.netlify.app/
 ![](assets\others\web-gif.gif)
+
 Este proyecto plantea la construccion de un eCommerce para el emprendimiento Indih Design enfocado basicamente en la produccion de accesorios de todo tipo 
 
 Navegacion del sitio 
