@@ -14,11 +14,12 @@ function App() {
         <NavBar />
         <Box maxWidth={"100%"} m="auto">
           <Routes>
+            <Route path="/" element={<HomeContainer />} />
+            <Route path="/home" element={<HomeContainer />} />
             <Route path="/productos/:categoria" element={<ItemListContainer />}/>
             <Route path="/productos" element={<ItemListContainer />} />
             <Route path="/producto/:id" element={<ItemDetailContainer />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/" element={<HomeContainer />} />
           </Routes>
 
           {/* en caso de ingresar a una ruta que no este definida antes lo dirige a /home */}
