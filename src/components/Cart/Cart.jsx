@@ -13,9 +13,14 @@ import {
   Stack,
   Text,
   useColorModeValue,
+  Link,
+  HStack,
+  Icon,
 } from "@chakra-ui/react";
+import { BiShoppingBag } from "react-icons/bi";
+import { BsCreditCard } from "react-icons/bs";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as reactLink } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 import CartItem from "./CartItem";
 
@@ -32,84 +37,100 @@ export default function Cart() {
   function FullCartLayout() {
     return (
       <Container maxW={"5xl"} mt={10}>
-        <Text textAlign={"center"} fontSize={"5xl"} m={3}>
-          {" "}
-          Finalizar compra{" "}
-        </Text>
+        <Heading
+          m={4}
+          textAlign={"center"}
+          fontSize={{ base: "4xl", md: "5xl" }}
+        >
+          Check Out
+        </Heading>
         <Grid
           templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(10, 3fr)" }}
           gap={6}
         >
           <GridItem colSpan={6}>
-            <ContactForm />
             <PersonalInfoForm />
           </GridItem>
           <GridItem colSpan={{ base: 6, lg: 4 }}>
             <Stack position={{ base: "inherit", lg: "fixed" }}>
-              <Stack>{listado}</Stack>
-              <Stack alignItems={"end"}>
-                <Text> Precio total ${cartTotalPrice} </Text>
-                <Link to={"/productos"}>
-                  <Button bg={"primaryDark"}>Seguir comprando</Button>
-                </Link>
+              <Stack>
+                {listado}
+                <Text alignSelf={"end"}> Precio total ${cartTotalPrice} </Text>
               </Stack>
+
+              <HStack justifyContent={"flex-end"}>
+                <Box>
+                  <Link as={reactLink} to={"/productos"}>
+                    <Button bg={"primaryDark"}>
+                      Continuar comprando <Icon as={BiShoppingBag} ml={1} />
+                    </Button>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link as={reactLink} to={"/cart"}>
+                    <Button
+                      alignSelf={"auto"}
+                      bg={"primaryDark"}
+                      onClick={CreateOrder}
+                    >
+                      Ir a pagar <Icon as={BsCreditCard} ml={1} />
+                    </Button>
+                  </Link>
+                </Box>
+              </HStack>
             </Stack>
           </GridItem>
         </Grid>
       </Container>
     );
   }
-  function ContactForm() {
-    const [input, setInput] = useState("");
-
-    const handleInputChange = (e) => setInput(e.target.value);
-
-    const isError = input === "";
-
-    return (
-      <FormControl isInvalid={isError}>
-        <FormLabel fontSize={"3xl"} htmlFor="email">
-          Datos de contacto
-        </FormLabel>
-        <Input
-          id="email"
-          type="email"
-          value={input}
-          onChange={handleInputChange}
-        />
-        {!isError ? (
-          <FormHelperText>
-            Toda la información de la compra te llegará a este correo
-            electrónico
-          </FormHelperText>
-        ) : (
-          <FormErrorMessage>
-            El correo electrónico es requerido
-          </FormErrorMessage>
-        )}
-      </FormControl>
-    );
-  }
 
   function PersonalInfoForm() {
     return (
-      <FormControl>
-        <FormLabel fontSize={"3xl"} htmlFor="name">
-          Datos del destinatario
-        </FormLabel>
-        <Input
-          borderColor={inputbordercolor}
-          id="name"
-          placeholder={"Nombre"}
-          type="text"
-          mt={2}
-        />
-        <Input borderColor={inputbordercolor} id="surname" placeholder={"Apellido"} type="text" mt={2} />
-        <Input borderColor={inputbordercolor} id="tel" placeholder={"Telefono"} type="tel" mt={2} />
-      </FormControl>
+      <Stack>
+        <FormControl isRequired>
+          <FormLabel htmlFor="email" fontSize={"2xl"}>Dirección de correo electrónico</FormLabel>
+          <Input id="email" type="email" borderColor={inputbordercolor} />
+          <FormHelperText>Nunca compartiremos tu email</FormHelperText>
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel fontSize={"2xl"} htmlFor="name">
+            Datos del comprador/a
+          </FormLabel>
+          <Input
+            borderColor={inputbordercolor}
+            id="name"
+            placeholder={"Nombre"}
+            type="text"
+            mt={2}
+          />
+          <Input
+            borderColor={inputbordercolor}
+            id="surname"
+            placeholder={"Apellido"}
+            type="text"
+            mt={2}
+          />
+          <Input
+            borderColor={inputbordercolor}
+            id="tel"
+            placeholder={"Telefono"}
+            type="tel"
+            mt={2}
+          />
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel htmlFor="calle" fontSize={"2xl"}>Datos de envio</FormLabel>
+          <Stack direction={"row"}>
+          <Input id="calle" type="text" w={"70%"} placeholder="Calle" borderColor={inputbordercolor} />
+          <Input id="altura" type="number" w={"30%"} placeholder="Altura" borderColor={inputbordercolor} />
+          </Stack>
+          
+         
+        </FormControl>
+      </Stack>
     );
   }
-
   function EmptyCart() {
     return (
       <Box textAlign="center" py={10} px={6}>
@@ -129,7 +150,7 @@ export default function Cart() {
           No te preocupes haz click abajo para recorrer nuestra tienda
         </Text>
 
-        <Link to={"/productos"}>
+        <Link as={reactLink} to={"/productos"}>
           <Button
             colorScheme="teal"
             bgGradient="linear(to-r, primary, primaryDark)"
@@ -141,5 +162,13 @@ export default function Cart() {
         </Link>
       </Box>
     );
+  }
+  function CreateOrder() {
+    const order = {
+      buyer: { name: "Daniel", surname: "Gianni", phone: "1134551805" },
+      cartList,
+      totalPrice: cartTotalPrice,
+    };
+    console.log(order);
   }
 }
