@@ -14,6 +14,7 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
@@ -34,7 +35,7 @@ export default function CartDrawer({ btnRef, isOpen, onClose }) {
         size={"lg"}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent borderLeftRadius="2xl">
           <DrawerCloseButton />
           <DrawerHeader>Carrito de compra</DrawerHeader>
 
@@ -43,22 +44,25 @@ export default function CartDrawer({ btnRef, isOpen, onClose }) {
               {cartList.map((prod) => (
                 <CartItem key={prod.id} prod={prod} />
               ))}
-              <Box alignSelf={"end"}>
-                <Stat>
-                  <StatLabel>Precio total del carrito</StatLabel>
-                  <StatNumber>$ {cartTotalPrice}</StatNumber>
-                </Stat>
-              </Box>
+              <Box alignSelf={"end"}></Box>
             </Stack>
           </DrawerBody>
 
-          <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={clearCartList}>
-              Limpiar carrito
-            </Button>
-            <Link to={"/cart"}>
-              <Button onClick={onClose} bg="primary">Finalizar compra</Button>
-            </Link>
+          <DrawerFooter boxShadow="dark-lg"borderLeftRadius="2xl" borderTopRadius="2xl" bgGradient={useColorModeValue("linear(to-b, gray.50, gray.300)", "linear(to-b, gray.600, gray.700)")}>
+            <Stat>
+              <StatLabel fontSize={"xs"}>Total</StatLabel>
+              <StatNumber fontSize={"3xl"} >$ {cartTotalPrice}</StatNumber>
+            </Stat>
+            <Stack direction={"row"}>
+              <Button variant="outline" mr={3} onClick={clearCartList}>
+                Limpiar carrito
+              </Button>
+              <Link to={"/cart"}>
+                <Button onClick={onClose} bg="primary">
+                  Finalizar compra
+                </Button>
+              </Link>
+            </Stack>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

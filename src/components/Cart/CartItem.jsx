@@ -8,20 +8,19 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { BsTrash } from "react-icons/bs";
+import { FiDelete } from "react-icons/fi";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useCartContext } from "../../context/CartContext";
 import SimpleAlertDialog from "../OtherComponents/alert/SimpleAlertDialog";
 
-
 export default function CartItem({ prod }) {
-  const { isOpen, onOpen , onClose} = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   const { deleteFromCart, updateCartItem } = useCartContext();
 
   const sumarContador = () => {
     if (prod.cantidad === prod.stock) {
-      onOpen() // alert("no se puede agregar mas items al carrito por falta de stock")
+      onOpen(); // alert("no se puede agregar mas items al carrito por falta de stock")
     } else {
       const cartItemToUpdate = { ...prod };
       cartItemToUpdate.cantidad++;
@@ -43,12 +42,14 @@ export default function CartItem({ prod }) {
 
   return (
     <Stack
+    
       direction={"row"}
-      border={"1px"}
-      borderColor={useColorModeValue("gray.400","gray.400")}
+      border={"1x"}
+      borderColor={useColorModeValue("gray.400", "gray.400")}
       p={2}
       spacing={2}
       rounded={"lg"}
+      boxShadow={useColorModeValue("xl", "2xl")}
     >
       <Stack>
         <Image rounded={"lg"} height={100} width={100} src={prod.urlimg} />
@@ -72,9 +73,9 @@ export default function CartItem({ prod }) {
               color={addToCartColors}
               aria-label="Send email"
               icon={<MinusIcon />}
-              _active={useColorModeValue("none", "none")}
-              _focus={useColorModeValue("none", "none")}
-              _hover={useColorModeValue("none", "none")}
+              _active={""}
+              _focus={""}
+              _hover={""}
               onClick={restarContador}
             />
 
@@ -87,9 +88,9 @@ export default function CartItem({ prod }) {
               color={addToCartColors}
               aria-label="Send email"
               icon={<AddIcon />}
-              _active={useColorModeValue("none", "none")}
-              _focus={useColorModeValue("none", "none")}
-              _hover={useColorModeValue("none", "none")}
+              _active={""}
+              _focus={""}
+              _hover={""}
               onClick={sumarContador}
             />
           </Stack>
@@ -101,14 +102,26 @@ export default function CartItem({ prod }) {
         >
           <IconButton
             variant="unstyled"
-            color="red.300"
+            color={useColorModeValue("gray.700", undefined)}
             aria-label="Call Sage"
-            fontSize="20px"
-            icon={<BsTrash />}
+            fontSize="2xl"
+            icon={<FiDelete />}
             onClick={delteItem}
+            _hover={{
+              color: "red.300",
+            }}
           />
           <Box> Precio total : ${prod.price * prod.cantidad}</Box>
-          { isOpen && <SimpleAlertDialog isOpen={isOpen} onClose={onClose} title={"Stock Insuficiente"} textbody={"Superaste el limite de Stock para el producto : " + prod.name} />}
+          {isOpen && (
+            <SimpleAlertDialog
+              isOpen={isOpen}
+              onClose={onClose}
+              title={"Stock Insuficiente"}
+              textbody={
+                "Superaste el limite de Stock para el producto : " + prod.name
+              }
+            />
+          )}
         </Stack>
       </Stack>
     </Stack>

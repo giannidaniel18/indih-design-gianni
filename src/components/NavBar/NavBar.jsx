@@ -31,8 +31,6 @@ const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("primaryDark", "primaryDark");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
-  
-
   return (
     <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
@@ -40,16 +38,16 @@ const DesktopNav = () => {
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
+                as={ReactLink}
                 p={2}
-                
-                href={navItem.href ?? "#"}
+                to={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
                 }}
-                _focus={{}} 
+                _focus={{}}
               >
                 {navItem.label}
               </Link>
@@ -145,7 +143,6 @@ const MobileNavItem = ({ label, children, href }) => {
           textDecoration: "none",
         }}
       >
-        
         <Text
           fontWeight={600}
           color={useColorModeValue("gray.600", "gray.200")}
@@ -174,12 +171,7 @@ const MobileNavItem = ({ label, children, href }) => {
         >
           {children &&
             children.map((child) => (
-              <Link
-                key={child.label}
-                py={2}
-                as={ReactLink}
-                to={child.href}
-              >
+              <Link key={child.label} py={2} as={ReactLink} to={child.href}>
                 {child.label}
               </Link>
             ))}
@@ -190,10 +182,7 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
-  {
-    label: "Inicio",
-    href: "/",
-  },
+
   {
     label: "Productos",
     children: [
@@ -227,16 +216,13 @@ const NAV_ITEMS = [
 
 function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
-  const { getCartQty} = useCartContext()
+  const { getCartQty } = useCartContext();
 
-  const cartBadge = getCartQty()
- 
+  const cartBadge = getCartQty();
 
   return (
-    <Box className="navStick" zIndex={2} >
+    <Box className="navStick" zIndex={2}>
       <Flex
-        
-        
         bg={useColorModeValue("gray.100", "gray.800")}
         color={useColorModeValue("gray.500", "gray.200")}
         minH={"60px"}
@@ -262,12 +248,14 @@ function NavBar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Link as={ReactLink} to={"/"}>
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
           >
             Indih Design
           </Text>
+          </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />

@@ -22,14 +22,13 @@ import { useState } from "react";
 import { useCartContext } from "../../context/CartContext";
 import SimpleAlertDialog from "../OtherComponents/alert/SimpleAlertDialog";
 
-
 export default function ItemDetail({ prod }) {
-  const { isOpen, onOpen , onClose} = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const precioEfectivo = Math.trunc(parseInt(prod.price) / 1.15);
   const cuotas = Math.trunc(parseInt(prod.price) / 3);
   const [talle, setTalle] = useState("medium");
   const { addToCart, cartList } = useCartContext();
-  const toast = useToast()
+  const toast = useToast();
 
   const ElegirTalle = (e) => {
     setTalle(e.target.value);
@@ -39,28 +38,30 @@ export default function ItemDetail({ prod }) {
     const index = cartList.findIndex((producto) => producto.id === prod.id);
     if (index !== -1) {
       if (cantidad + cartList[index].cantidad > prod.stock) {
-       onOpen()  // alert("no se puede agregar mas items al carrito por falta de stock")
+        onOpen(); // alert("no se puede agregar mas items al carrito por falta de stock")
       } else {
         addToCart({ ...prod, cantidad, talle });
-        toastAddToCart(cantidad)
+        toastAddToCart(cantidad);
       }
     } else {
       addToCart({ ...prod, cantidad, talle });
-      toastAddToCart(cantidad)
+      toastAddToCart(cantidad);
     }
   };
 
   function toastAddToCart(contador) {
-    return (
-      toast({
-        position: 'top-right',duration:'800',
-        render: () => (
-          <Box color='white' p={3} mt={"50px"} borderRadius = 'lg' bg='primaryDark' >
-            <Text> {contador} {prod.name} agregados al carrito</Text>
-          </Box>
-        ),
-      })
-    )
+    return toast({
+      position: "top-right",
+      duration: "500",
+      render: () => (
+        <Box color="white" p={3} mt={"50px"} borderRadius="lg" bg="primaryDark">
+          <Text>
+            {" "}
+            {contador} {prod.name} agregados al carrito
+          </Text>
+        </Box>
+      ),
+    });
   }
 
   return (
@@ -147,7 +148,17 @@ export default function ItemDetail({ prod }) {
                 <option value="medium">M</option>
                 <option value="large">L</option>
               </Select>
-              { isOpen && <SimpleAlertDialog isOpen={isOpen} onClose={onClose} title={"Stock Insuficiente"} textbody={"Superaste el limite de Stock para el producto : " + prod.name} />}
+              {isOpen && (
+                <SimpleAlertDialog
+                  isOpen={isOpen}
+                  onClose={onClose}
+                  title={"Stock Insuficiente"}
+                  textbody={
+                    "Superaste el limite de Stock para el producto : " +
+                    prod.name
+                  }
+                />
+              )}
             </Box>
           </Stack>
 
@@ -157,7 +168,6 @@ export default function ItemDetail({ prod }) {
             onAdd={onAdd}
             talle={talle}
             onOpen={onOpen}
-            
           />
 
           <Stack direction="row" alignItems="center">

@@ -6,7 +6,10 @@ export default extendTheme({
     initialColorMode: "light",
     useSystemColorMode: false,
   },
-
+ fonts: {
+    heading: `'Helvetica', Helvetica`,
+    body: `'Helvetica', Helvetica`,
+  },
   colors: {
     primary: "#cda5f3",
     primaryDark: "#8674aa",

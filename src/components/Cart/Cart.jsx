@@ -16,6 +16,7 @@ import {
   Link,
   HStack,
   Icon,
+  VStack,
 } from "@chakra-ui/react";
 import { BiShoppingBag } from "react-icons/bi";
 import { BsCreditCard } from "react-icons/bs";
@@ -36,7 +37,7 @@ export default function Cart() {
 
   function FullCartLayout() {
     return (
-      <Container maxW={"5xl"} mt={10}>
+      <Stack maxW={"90%"} mt={10} alignItems="center" mx="auto">
         <Heading
           m={4}
           textAlign={"center"}
@@ -44,52 +45,53 @@ export default function Cart() {
         >
           Check Out
         </Heading>
-        <Grid
-          templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(10, 3fr)" }}
-          gap={6}
-        >
-          <GridItem colSpan={6}>
+        <Stack direction={{ base: "column", lg: "row" }} gap={10}>
+          <VStack>
             <PersonalInfoForm />
-          </GridItem>
-          <GridItem colSpan={{ base: 6, lg: 4 }}>
-            <Stack position={{ base: "inherit", lg: "fixed" }}>
-              <Stack>
-                {listado}
-                <Text alignSelf={"end"}> Precio total ${cartTotalPrice} </Text>
-              </Stack>
+          </VStack>
+          <VStack >
+            <Stack minWidth={{base: 300, lg: 600}} gap={10}>
+              {listado}
+              <Stack fontSize={35} fontWeight={"light"} direction={"row"} justifyContent={"space-between"}>
 
-              <HStack justifyContent={"flex-end"}>
-                <Box>
-                  <Link as={reactLink} to={"/productos"}>
-                    <Button bg={"primaryDark"}>
-                      Continuar comprando <Icon as={BiShoppingBag} ml={1} />
-                    </Button>
-                  </Link>
-                </Box>
-                <Box>
-                  <Link as={reactLink} to={"/cart"}>
-                    <Button
-                      alignSelf={"auto"}
-                      bg={"primaryDark"}
-                      onClick={CreateOrder}
-                    >
-                      Ir a pagar <Icon as={BsCreditCard} ml={1} />
-                    </Button>
-                  </Link>
-                </Box>
-              </HStack>
+              <Text> Total  </Text>
+              <Text> ${cartTotalPrice}</Text>
+              </Stack>
             </Stack>
-          </GridItem>
-        </Grid>
-      </Container>
+
+            <Stack direction={"row"} alignSelf={"end"} color={"gray.50"}  >
+              <Box>
+                <Link  as={reactLink} to={"/productos"}>
+                  <Button  bg={"primaryDark"} _hover={""}>
+                    Continuar comprando <Icon as={BiShoppingBag} ml={1} />
+                  </Button>
+                </Link>
+              </Box>
+              <Box>
+                <Link  as={reactLink} to={"/cart"}>
+                  <Button
+                  _hover={""}
+                    alignSelf={"auto"}
+                    bg={"primaryDark"}
+                    onClick={CreateOrder}
+                  >
+                    Ir a pagar <Icon as={BsCreditCard} ml={1} />
+                  </Button>
+                </Link>
+              </Box>
+            </Stack>
+          </VStack>
+        </Stack>
+      </Stack>
     );
   }
-
   function PersonalInfoForm() {
     return (
       <Stack>
         <FormControl isRequired>
-          <FormLabel htmlFor="email" fontSize={"2xl"}>Dirección de correo electrónico</FormLabel>
+          <FormLabel htmlFor="email" fontSize={"2xl"}>
+            Dirección de correo electrónico
+          </FormLabel>
           <Input id="email" type="email" borderColor={inputbordercolor} />
           <FormHelperText>Nunca compartiremos tu email</FormHelperText>
         </FormControl>
@@ -120,13 +122,25 @@ export default function Cart() {
           />
         </FormControl>
         <FormControl isRequired>
-          <FormLabel htmlFor="calle" fontSize={"2xl"}>Datos de envio</FormLabel>
+          <FormLabel htmlFor="calle" fontSize={"2xl"}>
+            Datos de envio
+          </FormLabel>
           <Stack direction={"row"}>
-          <Input id="calle" type="text" w={"70%"} placeholder="Calle" borderColor={inputbordercolor} />
-          <Input id="altura" type="number" w={"30%"} placeholder="Altura" borderColor={inputbordercolor} />
+            <Input
+              id="calle"
+              type="text"
+              w={"70%"}
+              placeholder="Calle"
+              borderColor={inputbordercolor}
+            />
+            <Input
+              id="altura"
+              type="number"
+              w={"30%"}
+              placeholder="Altura"
+              borderColor={inputbordercolor}
+            />
           </Stack>
-          
-         
         </FormControl>
       </Stack>
     );
@@ -163,6 +177,7 @@ export default function Cart() {
       </Box>
     );
   }
+
   function CreateOrder() {
     const order = {
       buyer: { name: "Daniel", surname: "Gianni", phone: "1134551805" },
