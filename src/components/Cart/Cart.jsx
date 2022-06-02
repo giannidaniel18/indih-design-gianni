@@ -49,28 +49,33 @@ export default function Cart() {
           <VStack>
             <PersonalInfoForm />
           </VStack>
-          <VStack >
-            <Stack minWidth={{base: 300, lg: 600}} gap={10}>
+          <VStack>
+            <Stack minWidth={{ base: 300, lg: 600 }} gap={10}>
               {listado}
-              <Stack fontSize={35} fontWeight={"light"} direction={"row"} justifyContent={"space-between"}>
-
-              <Text> Total  </Text>
-              <Text> ${cartTotalPrice}</Text>
+              <Stack
+                fontSize={35}
+                fontWeight={"light"}
+                direction={"row"}
+                justifyContent={"space-between"}
+                p={2}
+              >
+                <Text> Total </Text>
+                <Text> ${cartTotalPrice}</Text>
               </Stack>
             </Stack>
 
-            <Stack direction={"row"} alignSelf={"end"} color={"gray.50"}  >
+            <Stack direction={"row"} alignSelf={"end"} color={"gray.50"}>
               <Box>
-                <Link  as={reactLink} to={"/productos"}>
-                  <Button  bg={"primaryDark"} _hover={""}>
+                <Link as={reactLink} to={"/productos"}>
+                  <Button bg={"primaryDark"} _hover={""}>
                     Continuar comprando <Icon as={BiShoppingBag} ml={1} />
                   </Button>
                 </Link>
               </Box>
               <Box>
-                <Link  as={reactLink} to={"/cart"}>
+                <Link as={reactLink} to={"/cart"}>
                   <Button
-                  _hover={""}
+                    _hover={""}
                     alignSelf={"auto"}
                     bg={"primaryDark"}
                     onClick={CreateOrder}
