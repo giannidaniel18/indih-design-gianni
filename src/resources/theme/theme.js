@@ -7,8 +7,8 @@ export default extendTheme({
     useSystemColorMode: false,
   },
  fonts: {
-    heading: `'Helvetica', Helvetica`,
-    body: `'Helvetica', Helvetica`,
+    heading: `'Helvetica', sans-serif`,
+    body: `'Helvetica', sans-serif`,
   },
   colors: {
     primary: "#cda5f3",

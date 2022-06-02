@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   IconButton,
@@ -15,6 +15,7 @@ import SimpleAlertDialog from "../OtherComponents/alert/SimpleAlertDialog";
 
 export default function CartItem({ prod }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+ 
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   const { deleteFromCart, updateCartItem } = useCartContext();
 
@@ -38,11 +39,14 @@ export default function CartItem({ prod }) {
 
   const delteItem = () => {
     deleteFromCart(prod.id);
+    
   };
 
   return (
+   
+
     <Stack
-    
+    animateOpacity
       direction={"row"}
       border={"1x"}
       borderColor={useColorModeValue("gray.400", "gray.400")}
@@ -125,5 +129,6 @@ export default function CartItem({ prod }) {
         </Stack>
       </Stack>
     </Stack>
+   
   );
 }

@@ -3,20 +3,12 @@ import Item from "../Items/Item";
 import { useEffect, useState } from "react";
 import ItemSkeleton from "../OtherComponents/Skeletons/ItemSkeleton";
 import { useParams } from "react-router-dom";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { getFirestore, collection, getDocs, query, where, } from "firebase/firestore";
 
 function ItemListContainer() {
   const [productos, setProductos] = useState([]);
-  const [producto, setProducto] = useState({});
   const [loading, setLoading] = useState(true);
   const { categoria } = useParams();
-
 
   //TRAER LOS PRODUCTOS FILTRANDO POR CATEGORIA
   useEffect(() => {
@@ -29,7 +21,11 @@ function ItemListContainer() {
         where("category", "==", categoria)
       );
       getDocs(queryCollectionFilter)
-        .then((resp) =>setProductos(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() }))))
+        .then((resp) =>
+          setProductos(
+            resp.docs.map((prod) => ({ id: prod.id, ...prod.data() }))
+          )
+        )
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     } else {
@@ -43,8 +39,6 @@ function ItemListContainer() {
         .finally(() => setLoading(false));
     }
   }, [categoria]);
-
-  
 
   return (
     <Grid
