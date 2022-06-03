@@ -135,8 +135,8 @@ const MobileNavItem = ({ label, children, href }) => {
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
-        as={Link}
-        href={href ?? "#"}
+        as={ReactLink}
+        to={href ?? "#"}
         justify={"space-between"}
         align={"center"}
         _hover={{
@@ -185,7 +185,6 @@ const NAV_ITEMS = [
 
   {
     label: "Productos",
-    href: "/productos",
     children: [
       {
         label: "Holders",
@@ -206,6 +205,10 @@ const NAV_ITEMS = [
       {
         label: "Anillos",
         href: "productos/Anillos",
+      },
+      {
+        label: "Todos los productos",
+        href: "productos",
       },
     ],
   },

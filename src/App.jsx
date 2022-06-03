@@ -21,8 +21,6 @@ function App() {
             <Route path="/producto/:id" element={<ItemDetailContainer />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
-
-          {/* en caso de ingresar a una ruta que no este definida antes lo dirige a /home */}
         </Box>
       </CartContextProvider>
     </BrowserRouter>
