@@ -1,22 +1,22 @@
 import ItemCount from "./ItemCount";
 import {
   Box,
-  Center,
   useColorModeValue,
   Heading,
   Text,
   Stack,
   Image,
-  Button
 } from "@chakra-ui/react";
 import ItemDetailButton from "./ItemDetailButton";
 
 function Item(props) {
   
   return (
-    <Center>
+   
       <Box
-        minW={230}
+        
+        minW={30}
+        maxH={500}
         role={"group"}
         p={6}
         maxW={"330px"}
@@ -30,29 +30,12 @@ function Item(props) {
         <Box
           rounded={"lg"}
           pos={"relative"}
-          height={"240px"}
-          _after={{
-            transition: "all .3s ease",
-            content: '""',
-            w: "full",
-            h: "full",
-            pos: "absolute",
-            top: 5,
-            left: 0,
-            backgroundImage: `url(${props.prod.urlimg})`,
-            filter: "blur(15px)",
-            zIndex: -1,
-          }}
-          _groupHover={{
-            _after: {
-              filter: "blur(20px)",
-            },
-          }}
+          height={"240px"}         
         >
           <Image
             rounded={"lg"}
-            height={250}
-            width={282}
+            height={270}
+            width={260}
             objectFit={"cover"}
             src={props.prod.urlimg}
           />
@@ -72,7 +55,7 @@ function Item(props) {
         </Stack>
         <ItemDetailButton id={props.prod.id}/>
       </Box>
-    </Center>
+   
   );
 }
 

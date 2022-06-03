@@ -1,20 +1,11 @@
 import { useState } from "react";
-import {
-  Stack,
-  IconButton,
-  Button,
-  Icon,
-  useColorModeValue,
-  Text,
-  
-} from "@chakra-ui/react";
+import { Stack,IconButton,Button,Icon,useColorModeValue,Text } from "@chakra-ui/react";
 import { BsCart } from "react-icons/bs";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
-export default function ItemCount({ stock, initial, onAdd, talle}) {
+export default function ItemCount({ stock, initial, onAdd, talle }) {
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   const [contador, setContador] = useState(initial);
- 
 
   const sumarContador = () => {
     if (stock > 0) {
@@ -32,12 +23,7 @@ export default function ItemCount({ stock, initial, onAdd, talle}) {
   };
   const addToCart = () => {
     onAdd(contador, talle);
-    
   };
-
-  
-
-
 
   return (
     <Stack
@@ -59,9 +45,9 @@ export default function ItemCount({ stock, initial, onAdd, talle}) {
           color={addToCartColors}
           aria-label="Send email"
           icon={<MinusIcon />}
-          _active={useColorModeValue("none", "none")}
-          _focus={useColorModeValue("none", "none")}
-          _hover={useColorModeValue("none", "none")}
+          _active={""}
+          _focus={""}
+          _hover={""}
           onClick={restarContador}
         />
 
@@ -74,9 +60,9 @@ export default function ItemCount({ stock, initial, onAdd, talle}) {
           color={addToCartColors}
           aria-label="Send email"
           icon={<AddIcon />}
-          _active={useColorModeValue("none", "none")}
-          _focus={useColorModeValue("none", "none")}
-          _hover={useColorModeValue("none", "none")}
+          _active={""}
+          _focus={""}
+          _hover={""}
           onClick={sumarContador}
         />
       </Stack>
@@ -88,7 +74,6 @@ export default function ItemCount({ stock, initial, onAdd, talle}) {
           variant="solid"
           w={{ base: "100%", lg: "300px" }}
           onClick={addToCart}
-          _hover={{}}
         >
           {stock == 0 ? (
             "Sin Stock"

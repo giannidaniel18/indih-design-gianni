@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Wrap, WrapItem } from "@chakra-ui/react";
 import Item from "../Items/Item";
 import { useEffect, useState } from "react";
 import ItemSkeleton from "../OtherComponents/Skeletons/ItemSkeleton";
@@ -10,76 +10,64 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import NotFound from "../OtherComponents/NotFound/NotFound";
 
 function ItemListContainer() {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const { categoria } = useParams();
 
-  //TRAER LOS PRODUCTOS FILTRANDO POR CATEGORIA
   useEffect(() => {
+    setLoading(true);
     const db = getFirestore();
     const queryCollection = collection(db, "productos");
-    if (categoria) {
-      setLoading(true);
-      const queryCollectionFilter = query(
-        queryCollection,
-        where("category", "==", categoria)
-      );
-      getDocs(queryCollectionFilter)
-        .then((resp) =>
-          setProductos(
-            resp.docs.map((prod) => ({ id: prod.id, ...prod.data() }))
-          )
-        )
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
-    } else {
-      getDocs(queryCollection)
-        .then((resp) =>
-          setProductos(
-            resp.docs.map((prod) => ({ id: prod.id, ...prod.data() }))
-          )
-        )
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
-    }
+    const queryCollectionFilter = categoria
+      ? query(queryCollection, where("category", "==", categoria))
+      : queryCollection;
+    getDocs(queryCollectionFilter)
+      .then((resp) =>
+        setProductos(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
+      )
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, [categoria]);
 
   return (
-    <Grid
-      mt={5}
-      templateColumns={{
-        base: "repeat(1, 1fr)",
-        md: "repeat(2, 1fr)",
-        lg: "repeat(3, 5fr)",
-        xl: "repeat(4, 3fr)",
-      }}
-      gap={2}
-    >
+    <Wrap spacing="20px" maxW={"80%"} m="auto" justify={"center"}>
       {loading ? (
         <>
-          <GridItem>
+          <WrapItem>
             <ItemSkeleton />
-          </GridItem>
-          <GridItem>
+          </WrapItem>
+          <WrapItem>
             <ItemSkeleton />
-          </GridItem>
-          <GridItem>
+          </WrapItem>
+          <WrapItem>
             <ItemSkeleton />
-          </GridItem>
-          <GridItem>
+          </WrapItem>
+          <WrapItem>
             <ItemSkeleton />
-          </GridItem>
+          </WrapItem>
+          <WrapItem>
+            <ItemSkeleton />
+          </WrapItem>
         </>
+      ) : productos.length === 0 ? (
+        <WrapItem>
+          <NotFound
+            title={`Ups!! En este momento no tenemos stock de ${categoria}`}
+          />
+        </WrapItem>
       ) : (
         productos.map((prod) => (
-          <GridItem key={prod.id} w="100%">
+          <WrapItem key={prod.id}>
             <Item prod={prod} />
-          </GridItem>
+          </WrapItem>
         ))
       )}
-    </Grid>
+    </Wrap>
   );
 }
+
 export default ItemListContainer;
+

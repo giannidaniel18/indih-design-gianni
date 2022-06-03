@@ -41,7 +41,7 @@ const CartContextProvider = ({ children }) => {
     return sum;
   };
   
-  console.log(cartList)
+ 
 
 
   return (
