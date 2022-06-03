@@ -38,9 +38,12 @@ const CartContextProvider = ({ children }) => {
     const sum = cartList.reduce((acumulator, object) => {
       return acumulator + object.price * object.cantidad;
     }, 0);
-  
     return sum;
   };
+  
+  console.log(cartList)
+
+
   return (
     <CartContext.Provider
       value={{

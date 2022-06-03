@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ItemDetailSkeleton from "../OtherComponents/Skeletons/ItemDetailSkeleton";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+import NotFound from "../OtherComponents/NotFound/NotFound";
 
 export default function ItemDetailContainer() {
   const [producto, setProducto] = useState({});
@@ -14,30 +15,23 @@ export default function ItemDetailContainer() {
 
   useEffect(() => {
     const db = getFirestore();
-    if(id){
-      const dbQuery = doc(db, "productos", id);
-      getDoc(dbQuery)
-        .then(prod => setProducto({ id: prod.id, ...prod.data()}))
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false))
-    } else{
-      setProducto({
-        id_product: "N/A",
-        category: "N/A",
-        name: "N/A",
-        description: "N/A",
-        price: "N/A",
-        img: "N/A",
-        url: "N/A",
-        stock: "N/A",
-      },)
-    }
+    const dbQuery = doc(db, "productos", id);
+    getDoc(dbQuery)
+      .then((prod) => setProducto({ id: prod.id, ...prod.data() }))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, [id]);
+
 
   return (
     <Box>
       {loading ? (
         <ItemDetailSkeleton />
+      ) : Object.keys(producto).length === 1 ? (
+        <NotFound
+          title={"Ups! No encontramos el producto que estas buscando"}
+          description={"No te preocupes haz click abajo para recorrer nuestra tienda"}
+        />
       ) : (
         <ItemDetail key={producto.id} prod={producto} />
       )}

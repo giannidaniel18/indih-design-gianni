@@ -3,7 +3,13 @@ import Item from "../Items/Item";
 import { useEffect, useState } from "react";
 import ItemSkeleton from "../OtherComponents/Skeletons/ItemSkeleton";
 import { useParams } from "react-router-dom";
-import { getFirestore, collection, getDocs, query, where, } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 function ItemListContainer() {
   const [productos, setProductos] = useState([]);

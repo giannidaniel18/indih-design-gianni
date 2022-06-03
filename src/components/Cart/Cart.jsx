@@ -1,39 +1,55 @@
+import React from "react";
+import { Link as reactLink } from "react-router-dom";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+  addDoc,
+} from "firebase/firestore";
 import {
   Box,
   Button,
-  Container,
   FormControl,
-  FormErrorMessage,
   FormHelperText,
   FormLabel,
-  Grid,
-  GridItem,
   Heading,
   Input,
   Stack,
   Text,
   useColorModeValue,
   Link,
-  HStack,
   Icon,
   VStack,
 } from "@chakra-ui/react";
 import { BiShoppingBag } from "react-icons/bi";
 import { BsCreditCard } from "react-icons/bs";
-import React, { useState } from "react";
-import { Link as reactLink } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 import CartItem from "./CartItem";
+import NotFound from "../OtherComponents/NotFound/NotFound";
 
 export default function Cart() {
   const inputbordercolor = useColorModeValue("gray.400", undefined);
-  const { cartList, getTotalPrice } = useCartContext();
+  const { cartList, getTotalPrice, getCartQty } = useCartContext();
   const cartTotalPrice = getTotalPrice();
   const listado = cartList.map((prod) => (
     <CartItem key={prod.id} prod={prod} />
   ));
 
-  return <>{cartList.length === 0 ? <EmptyCart /> : <FullCartLayout />}</>;
+  return (
+    <>
+      {cartList.length === 0 ? (
+        <NotFound
+          title={"Ups! Tu carrito esta vacío"}
+          subTitle={"Sin productos"}
+          description={"No te preocupes haz click abajo para recorrer nuestra tienda"}
+        />
+      ) : (
+        <FullCartLayout />
+      )}
+    </>
+  );
 
   function FullCartLayout() {
     return (
@@ -90,6 +106,7 @@ export default function Cart() {
       </Stack>
     );
   }
+
   function PersonalInfoForm() {
     return (
       <Stack>
@@ -150,45 +167,29 @@ export default function Cart() {
       </Stack>
     );
   }
-  function EmptyCart() {
-    return (
-      <Box textAlign="center" py={10} px={6}>
-        <Heading
-          display="inline-block"
-          as="h2"
-          size="2xl"
-          bgGradient="linear(to-r, primary, primaryDark)"
-          backgroundClip="text"
-        >
-          Ups! Tu carrito esta vacío
-        </Heading>
-        <Text fontSize="18px" mt={3} mb={2}>
-          Sin productos
-        </Text>
-        <Text color={"gray.500"} mb={6}>
-          No te preocupes haz click abajo para recorrer nuestra tienda
-        </Text>
-
-        <Link as={reactLink} to={"/productos"}>
-          <Button
-            colorScheme="teal"
-            bgGradient="linear(to-r, primary, primaryDark)"
-            color="white"
-            variant="solid"
-          >
-            Shopping
-          </Button>
-        </Link>
-      </Box>
-    );
-  }
 
   function CreateOrder() {
-    const order = {
-      buyer: { name: "Daniel", surname: "Gianni", phone: "1134551805" },
-      cartList,
-      totalPrice: cartTotalPrice,
-    };
-    console.log(order);
+    let order = {};
+    const fecha = Date.now();
+
+    (order.buyer = {
+      Nombre: "Daniel",
+      phone: "1134551805",
+      shippingMethod: "xxxxx",
+      adress: "xxxx",
+      fecha: new Date(fecha).toUTCString(),
+    }),
+      (order.totalItems = getCartQty());
+    order.totalPrice = cartTotalPrice;
+    order.items = cartList.map(({ id, name, price, talle, cantidad }) => {
+      return { id, name, price, talle, cantidad };
+    });
+
+    const db = getFirestore();
+    const queryCollection = collection(db, "orders");
+    addDoc(queryCollection, order)
+      .then((resp) => console.log(resp))
+      .catch((err) => console.log(err))
+      .finally(console.log("vaciar carrito"));
   }
 }

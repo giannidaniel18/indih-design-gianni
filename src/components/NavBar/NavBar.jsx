@@ -185,6 +185,7 @@ const NAV_ITEMS = [
 
   {
     label: "Productos",
+    href: "/productos",
     children: [
       {
         label: "Holders",

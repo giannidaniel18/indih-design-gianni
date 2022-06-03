@@ -15,10 +15,13 @@ import {
   StatNumber,
   StatHelpText,
   useColorModeValue,
+  Heading,
+  Icon,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 import CartItem from "./CartItem";
+import { BsCart } from "react-icons/bs";
 
 export default function CartDrawer({ btnRef, isOpen, onClose }) {
   const { cartList, clearCartList, getTotalPrice } = useCartContext();
@@ -37,7 +40,7 @@ export default function CartDrawer({ btnRef, isOpen, onClose }) {
         <DrawerOverlay />
         <DrawerContent borderLeftRadius="2xl">
           <DrawerCloseButton />
-          <DrawerHeader>Carrito de compra</DrawerHeader>
+          <DrawerHeader> <Heading >Carrito <Icon as={BsCart} boxSize={6} /></Heading> </DrawerHeader>
 
           <DrawerBody>
             <Stack justifyContent={"space-between"}>
@@ -52,7 +55,7 @@ export default function CartDrawer({ btnRef, isOpen, onClose }) {
             borderLeftRadius="2xl"
             borderTopRadius="2xl"
             bgGradient={useColorModeValue(
-              "linear(to-b, gray.50, gray.300)",
+              "linear(to-b, gray.200, gray.300)",
               "linear(to-b, gray.600, gray.700)"
             )}
           >
