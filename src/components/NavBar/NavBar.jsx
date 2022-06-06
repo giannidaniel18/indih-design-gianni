@@ -160,7 +160,7 @@ const MobileNavItem = ({ label, children, href }) => {
         )}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
+      <Collapse in={isOpen} animateopacity='true' style={{ marginTop: "0!important" }}>
         <Stack
           mt={2}
           pl={4}
@@ -301,7 +301,7 @@ function NavBar() {
         </Stack>
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
+      <Collapse in={isOpen} animateopacity='true'>
         <MobileNav />
       </Collapse>
     </Box>

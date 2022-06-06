@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link as reactLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {
   getFirestore,
   collection,
@@ -22,31 +23,66 @@ import {
   Link,
   Icon,
   VStack,
+  RadioGroup,
+  HStack,
+  Radio,
 } from "@chakra-ui/react";
 import { BiShoppingBag } from "react-icons/bi";
 import { BsCreditCard } from "react-icons/bs";
+import { FaShippingFast, FaStoreAlt } from "react-icons/fa";
 import { useCartContext } from "../../context/CartContext";
 import CartItem from "./CartItem";
 import NotFound from "../OtherComponents/NotFound/NotFound";
+import SuccessResult from "../OtherComponents/results/SuccesResult";
 
 export default function Cart() {
+  // BORDER INPUT EN COLORMODE
   const inputbordercolor = useColorModeValue("gray.400", undefined);
-  const { cartList, getTotalPrice, getCartQty } = useCartContext();
+
+  //USING CART CONTEXT
+  const { cartList, getTotalPrice, getCartQty, clearCartList } =
+    useCartContext();
   const cartTotalPrice = getTotalPrice();
   const listado = cartList.map((prod) => (
     <CartItem key={prod.id} prod={prod} />
   ));
+  // REACT HOOK FORM
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => CreateOrder(data);
+  const [orderId, setorderId] = useState(null);
+  const [shippingmethod, setshippingmethod] = useState("env_01");
+
+  const toggleShippingMethod = (e) => {
+    e.preventDefault;
+    setshippingmethod(e);
+  };
 
   return (
     <>
-      {cartList.length === 0 ? (
-        <NotFound
-          title={"Ups! Tu carrito esta vacío"}
-          subTitle={"Sin productos"}
-          description={"No te preocupes haz click abajo para recorrer nuestra tienda"}
-        />
+      {orderId === null ? (
+        cartList.length === 0 ? (
+          <NotFound
+            title={"Ups! Tu carrito esta vacío"}
+            subTitle={"Sin productos"}
+            description={
+              "No te preocupes haz click abajo para recorrer nuestra tienda"
+            }
+          />
+        ) : (
+          <FullCartLayout />
+        )
       ) : (
-        <FullCartLayout />
+        <SuccessResult
+          title={"Felicidades tu orden ha sido creada"}
+          text={"Hemos creado la orden de compra con el codigo : " + orderId}
+          buttonTo={"order/" + orderId}
+          buttonText={"Ver orden >  "}
+        />
       )}
     </>
   );
@@ -88,18 +124,6 @@ export default function Cart() {
                   </Button>
                 </Link>
               </Box>
-              <Box>
-                <Link as={reactLink} to={"/cart"}>
-                  <Button
-                    _hover={""}
-                    alignSelf={"auto"}
-                    bg={"primaryDark"}
-                    onClick={CreateOrder}
-                  >
-                    Ir a pagar <Icon as={BsCreditCard} ml={1} />
-                  </Button>
-                </Link>
-              </Box>
             </Stack>
           </VStack>
         </Stack>
@@ -110,86 +134,118 @@ export default function Cart() {
   function PersonalInfoForm() {
     return (
       <Stack>
-        <FormControl isRequired>
-          <FormLabel htmlFor="email" fontSize={"2xl"}>
-            Dirección de correo electrónico
-          </FormLabel>
-          <Input id="email" type="email" borderColor={inputbordercolor} />
-          <FormHelperText>Nunca compartiremos tu email</FormHelperText>
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel fontSize={"2xl"} htmlFor="name">
-            Datos del comprador/a
-          </FormLabel>
-          <Input
-            borderColor={inputbordercolor}
-            id="name"
-            placeholder={"Nombre"}
-            type="text"
-            mt={2}
-          />
-          <Input
-            borderColor={inputbordercolor}
-            id="surname"
-            placeholder={"Apellido"}
-            type="text"
-            mt={2}
-          />
-          <Input
-            borderColor={inputbordercolor}
-            id="tel"
-            placeholder={"Telefono"}
-            type="tel"
-            mt={2}
-          />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel htmlFor="calle" fontSize={"2xl"}>
-            Datos de envio
-          </FormLabel>
-          <Stack direction={"row"}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl isRequired mb={2} mr={5}>
+            <FormLabel htmlFor="email" fontSize={"2xl"}>
+              Dirección de correo electrónico
+            </FormLabel>
             <Input
-              id="calle"
+              borderColor={inputbordercolor}
+              id="email"
+              type="email"
+              placeholder="example@exampledom.com.ar"
+              {...register("email", { required: true })}
+            />
+          </FormControl>
+          <FormControl isRequired mb={2} mr={5}>
+            <FormLabel fontSize={"2xl"}>Datos de contacto</FormLabel>
+            <Input
+            borderColor={inputbordercolor}
+              id="clientName"
               type="text"
-              w={"70%"}
-              placeholder="Calle"
-              borderColor={inputbordercolor}
+              placeholder="Nombre"
+              {...register("clientName", { required: true })}
             />
+          </FormControl>
+          <FormControl isRequired mb={2} mr={5}>
             <Input
-              id="altura"
-              type="number"
-              w={"30%"}
-              placeholder="Altura"
-              borderColor={inputbordercolor}
+            borderColor={inputbordercolor}
+              id="clientSurName"
+              type="text"
+              placeholder="Apellido"
+              {...register("clientSurName", { required: true })}
             />
-          </Stack>
-        </FormControl>
+          </FormControl>
+          <FormControl isRequired mb={2} mr={5}>
+            <Input
+            borderColor={inputbordercolor}
+              id="clientPhone"
+              type="number"
+              placeholder="+54 9 11XXXXXXX"
+              {...register("clientPhone", { required: true })}
+            />
+          </FormControl>
+          <FormControl isRequired mb={2} mr={5}>
+            <FormLabel fontSize={"2xl"}>
+              Seleccione el método de envío <Icon pt={2} as={FaShippingFast} />{" "}
+            </FormLabel>
+            <RadioGroup defaultValue="env_01" onChange={toggleShippingMethod} value={shippingmethod}>
+              <HStack spacing="24px">
+                <Radio value="env_01" {...register("deliveryMethod")}>
+                  {"Envio a domicilio "}
+                </Radio>
+                <Radio value="env_02" {...register("deliveryMethod")}>
+                  {" Retiro en sucursal"}
+                </Radio>
+              </HStack>
+            </RadioGroup>
+            <FormHelperText>
+              En caso de envio a domicilio las entregas se realizaran por correo
+              argentino
+            </FormHelperText>
+          </FormControl>
+          {shippingmethod === "env_01" ? (
+            <FormControl isRequired mb={2} mr={5}>
+              <FormLabel htmlFor="clientDirection" fontSize={"2xl"}>
+                Direccion de entrega
+              </FormLabel>
+              <Input
+              borderColor={inputbordercolor}  
+                id="clientDirection"
+                type="text"
+                placeholder="calle falsa 123"
+                {...register("clientDirection", { required: true })}
+              />
+            </FormControl>
+          ) : (
+            ""
+          )}
+
+          <Box textAlign={"end"}>
+            <Button _hover={""} bg={"primaryDark"} type="submit">
+              Ir a pagar <Icon as={BsCreditCard} ml={1} />
+            </Button>
+          </Box>
+        </form>
       </Stack>
     );
   }
 
-  function CreateOrder() {
+  async function CreateOrder(data) {
     let order = {};
     const fecha = Date.now();
 
     (order.buyer = {
-      Nombre: "Daniel",
-      phone: "1134551805",
-      shippingMethod: "xxxxx",
-      adress: "xxxx",
-      fecha: new Date(fecha).toUTCString(),
+      data,
+      buyDate: new Date(fecha).toLocaleString(),
     }),
       (order.totalItems = getCartQty());
     order.totalPrice = cartTotalPrice;
-    order.items = cartList.map(({ id, name, price, talle, cantidad }) => {
-      return { id, name, price, talle, cantidad };
-    });
+    order.items = cartList.map(
+      ({ id, name, price, talle, cantidad, urlimg }) => {
+        return { id, name, price, talle, cantidad, urlimg };
+      }
+    );
 
     const db = getFirestore();
     const queryCollection = collection(db, "orders");
-    addDoc(queryCollection, order)
-      .then((resp) => console.log(resp))
-      .catch((err) => console.log(err))
-      .finally(console.log("vaciar carrito"));
+    const createDoc = await addDoc(queryCollection, order);
+    console.log(createDoc);
+    setorderId(createDoc.id);
+    clearCartList();
+
+    // .then((resp) => setorderId(resp.id))
+    // .catch((err) => console.log(err))
+    // .finally();
   }
 }

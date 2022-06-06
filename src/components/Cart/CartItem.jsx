@@ -46,7 +46,7 @@ export default function CartItem({ prod }) {
    
 
     <Stack
-    animateOpacity
+    animateopacity='true'
       direction={"row"}
       border={"1x"}
       borderColor={useColorModeValue("gray.400", "gray.400")}
