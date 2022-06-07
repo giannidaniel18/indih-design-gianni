@@ -9,7 +9,7 @@
 ![](web-gif.gif)
 
 ## 🚢 Navegación del sitio
-- Home : Ingresando a la ruta "/" o "/home" se llega a un template (todavia en desarrollo) de lo que va a ser el home de la pagina 
+- Home : Ingresando a la ruta ``` "/" o /home ``` se llega a un template (todavia en desarrollo) de lo que va a ser el home de la pagina 
 - Productos : Filtros por cada categoria de productos y por su totalidad accediendo desde el menu o a las rutas ```/productos y /productos/:categoria``` .
     - Detalle del producto : Una vez seleccionado un producto podras seleccionar una cantidad determinada y agregarlos a tu carrito de compra
     - Stock : No podras incluir cantidades que desborden el limite de stock para cada producto, deshabilitando el boton de agregar al carrito en caso de ya estar en 0 , o con un alert dialog en caso de que tu agregado este superando el limite actual.
@@ -17,7 +17,7 @@
     - Disponibilidad de colores : ``` En desarrollo ```.
 - Carrito de compra : El carrito de compra funciona como un contexto general de la aplicacion.
     - CartDrawer : Al momento de agregar un producto a nuestro carrito, estando en cualquier ruta de nuestra aplicacion, podremos entrar al cart drawer clickeando en el carrito del menu de navegacion, este nos mostrará toda la informacion relacionada a la compra actual.
-    - Carrito : Al finalizar la compra en el drawer, la aplicacion,  nos dirigirá hacia la ruta /cart para poder tener la misma informacion que veiamos en el drawer y a esto sumarle el formulario de compra para poder finalizarla.
+    - Carrito : Al finalizar la compra en el drawer, la aplicacion,  nos dirigirá hacia la ruta ```/cart``` para poder tener la misma informacion que veiamos en el drawer y a esto sumarle el formulario de compra para poder finalizarla.
     - Finalizar compra : Una vez que completamos los datos y apretamos el boton #Pagar nos dirige hacia una pagina de exito, y nos informara el numero de orden generado y la posibilidad de ver el detalle de esa orden.
     - Orden : Resumen de la compra realizada por el cliente. 
     - Medios de pago : ``` En desarrollo ```.
