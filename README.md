@@ -1,28 +1,41 @@
-# Indi Design
-## _Diseños a medida_
+#  Indih Design 
+### _Diseños a medida_
 
-Sitio hosteado en : https://visionary-tapioca-0c3bdc.netlify.app/
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+## 🌏 Sitio Web 
+### https://visionary-tapioca-0c3bdc.netlify.app/
+
 ![](web-gif.gif)
 
-Este proyecto plantea la construccion de un eCommerce para el emprendimiento Indih Design enfocado basicamente en la produccion de accesorios de todo tipo 
+## 🚢 Navegación del sitio
+- Home : Ingresando a la ruta "/" o "/home" se llega a un template (todavia en desarrollo) de lo que va a ser el home de la pagina 
+- Productos : Filtros por cada categoria de productos y por su totalidad accediendo desde el menu o a las rutas ```/productos y /productos/:categoria``` .
+    - Detalle del producto : Una vez seleccionado un producto podras seleccionar una cantidad determinada y agregarlos a tu carrito de compra
+    - Stock : No podras incluir cantidades que desborden el limite de stock para cada producto, deshabilitando el boton de agregar al carrito en caso de ya estar en 0 , o con un alert dialog en caso de que tu agregado este superando el limite actual.
+    - Galeria de productos : ``` En desarrollo ```.
+    - Disponibilidad de colores : ``` En desarrollo ```.
+- Carrito de compra : El carrito de compra funciona como un contexto general de la aplicacion.
+    - CartDrawer : Al momento de agregar un producto a nuestro carrito, estando en cualquier ruta de nuestra aplicacion, podremos entrar al cart drawer clickeando en el carrito del menu de navegacion, este nos mostrará toda la informacion relacionada a la compra actual.
+    - Carrito : Al finalizar la compra en el drawer, la aplicacion,  nos dirigirá hacia la ruta /cart para poder tener la misma informacion que veiamos en el drawer y a esto sumarle el formulario de compra para poder finalizarla.
+    - Finalizar compra : Una vez que completamos los datos y apretamos el boton #Pagar nos dirige hacia una pagina de exito, y nos informara el numero de orden generado y la posibilidad de ver el detalle de esa orden.
+    - Orden : Resumen de la compra realizada por el cliente. 
+    - Medios de pago : ``` En desarrollo ```.
+    - Validacion de direcciones : ``` En desarrollo ```.
 
 
-[![Spotify](https://<vercel-domain>.vercel.app/api/spotify)](https://open.spotify.com/user/<spotify-username>)
-## Features
+## 🔮 Tech
 
-- Import a HTML file and watch it magically convert to Markdown
-- Drag and drop images (requires your Dropbox account be linked)
-- Import and save files from GitHub, Dropbox, Google Drive and One Drive
-- Drag and drop markdown and HTML files into Dillinger
-- Export documents as Markdown, HTML and PDF
+En el desarrollo de este Ecommerce se usaron las siguientes tecnologias :
 
-Navegacion del sitio 
-- home : ingresando a la ruta "/" o "/home" se llega a un template (todavia en desarrollo) de lo que va a ser el home de la pagina
-- Productos : en este caso podemos encontrar en el menu de navegacion el apartado de productos con sus distintas categorias, para cada una de estas categorias se mostraran los productos disponibles e ingresando al detalle de cada producto se podra ver componente ItemDetail que contiene tanto la descripcion e imagenes del producto como tambien la posibilidad de agregar al carrito. Si quisieramos obtener un listado de  todos los productos sin discriminar por categoria podemos ingresar a la ruta /productos.
-- CartContext : Contexto utilizado para manipular a nivel global el carrito de compra.
-- Carrito de compra (icono y drawer) : en la parte superrior derecha del NavBar podemos ver el icono de un carrito que permanecera sin el badget mientras no haya items en el carrito. clickeando en el se puede abrir el CartDrawer que es una previsualizacion del carrito que nos permite realizar las siguientes acciones: 
-    - Actualizar items : En el drawer hay un comando que aumenta y decrementa directamente la cantidad de items seleccionados y agregados en el CartContext.
-    - Eliminar Item : Cada item agregado tendra la posibilidad de ser eliminado en su totalidad Haciendo click en el icono del tacho de basura / trash.
-    - Vaciar Carrito : En la parte inferior tendremos un boton que nos permitira Vaciar el carrito completamente.
-    - Finalizar compra : Este boton nos dirige al componente Cart.jsx 
-- Carrito de compra (Componente) : Es el encargado de mostrar la misma información que el Cart y ademas otorgar la posibilidad al cliente de que complete todos los datos correspondientes a la facturacion, entrega y pago(proximo a desarrollar). 
+| Tech        | Descrip           | Version  | link  |
+| ------------- |:-------------:| -----:| :-----:|
+| React js      | FrontEnd core lenguaje | **17.0.2** | https://reactjs.org/ |
+| Firebase     | Backend - DB     |  **9.8.1** | https://firebase.google.com/ |
+| Vite     | Build tool      |  **2.9.0** | https://vitejs.dev/ |
+| React-Router-dom     | Router library      |  **17.0.2** |https://reactrouter.com/ |
+| Chakra UI     | UI library      |  **1.8.8** |https://v1.chakra-ui.com/ |
+| Framer-motion     | Motion library for React    |  **6.3.10** |https://www.framer.com/motion/|
+| React-Hook-form     | forms data manipulation      |  **7.31.3** |https://react-hook-form.com/ |
+| React-icons     | Icons library     |  **4.3.1** |https://react-icons.github.io/react-icons/|
+| React-slick     | Small slider effects library      |  **0.29.0** |https://react-slick.neostack.com/ |
