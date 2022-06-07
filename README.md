@@ -1,10 +1,20 @@
-# Dillinger
-## _The Last Markdown Editor, Ever_
+# Indi Design
+## _Diseños a medida_
 
 Sitio hosteado en : https://visionary-tapioca-0c3bdc.netlify.app/
 ![](web-gif.gif)
 
 Este proyecto plantea la construccion de un eCommerce para el emprendimiento Indih Design enfocado basicamente en la produccion de accesorios de todo tipo 
+
+
+[![Spotify](https://<vercel-domain>.vercel.app/api/spotify)](https://open.spotify.com/user/<spotify-username>)
+## Features
+
+- Import a HTML file and watch it magically convert to Markdown
+- Drag and drop images (requires your Dropbox account be linked)
+- Import and save files from GitHub, Dropbox, Google Drive and One Drive
+- Drag and drop markdown and HTML files into Dillinger
+- Export documents as Markdown, HTML and PDF
 
 Navegacion del sitio 
 - home : ingresando a la ruta "/" o "/home" se llega a un template (todavia en desarrollo) de lo que va a ser el home de la pagina
