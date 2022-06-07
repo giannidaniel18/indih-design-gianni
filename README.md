@@ -28,6 +28,10 @@
     - Orden : Resumen de la compra realizada por el cliente. 
     - Medios de pago : ``` En desarrollo ```.
     - Validacion de direcciones : ``` En desarrollo ```.
+- Color Mode : En el menu de navegacion existe un boton que permite hacer el switch entre el Light y Dark Mode
+- Inicio de session : ``` En desarrollo ```.
+- Registro de usuarios : ``` En desarrollo ```.
+- CRUD de productos : ``` En desarrollo ```.
 
 
 ## 🔮 Tech
