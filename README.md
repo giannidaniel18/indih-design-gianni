@@ -1,7 +1,13 @@
 #  Indih Design 
 ### _Diseños a medida_
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+![Build Status](https://img.shields.io/badge/build-inprogress-green) 
+![Version](https://img.shields.io/badge/Version-0.1.25-blue) 
+
+
+
+![Js](https://img.shields.io/badge/-JavaScript-yellow) ![React](https://img.shields.io/badge/-React%20js-blue) ![Chakra](https://img.shields.io/badge/-Chakra%20UI-70CAD1) ![firebase](https://img.shields.io/badge/-Firebase%F0%9F%94%A5-FABC2C)
 
 ## 🌏 Sitio Web 
 ### https://visionary-tapioca-0c3bdc.netlify.app/
