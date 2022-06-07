@@ -19,7 +19,7 @@
 - Productos : Filtros por cada categoria de productos y por su totalidad accediendo desde el menu o a las rutas ```/productos y /productos/:categoria``` .
     - Detalle del producto : Una vez seleccionado un producto podras seleccionar una cantidad determinada y agregarlos a tu carrito de compra
     - Stock : No podras incluir cantidades que desborden el limite de stock para cada producto, deshabilitando el boton de agregar al carrito en caso de ya estar en 0 , o con un alert dialog en caso de que tu agregado este superando el limite actual.
-    - Galeria de productos : ```js En desarrollo ```.
+    - Galeria de productos : ```javascript En desarrollo ```.
     - Disponibilidad de colores : ``` En desarrollo ```.
 - Carrito de compra : El carrito de compra funciona como un contexto general de la aplicacion.
     - CartDrawer : Al momento de agregar un producto a nuestro carrito, estando en cualquier ruta de nuestra aplicacion, podremos entrar al cart drawer clickeando en el carrito del menu de navegacion, este nos mostrará toda la informacion relacionada a la compra actual.
