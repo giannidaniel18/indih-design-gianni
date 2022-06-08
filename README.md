@@ -15,7 +15,7 @@
 ![](web-gif.gif)
 
 ## 🚢 Navegación del sitio
-- Home : Ingresando a la ruta ``` "/" o /home ``` se llega a un template (todavia en desarrollo) de lo que va a ser el home de la pagina 
+- Home : Ingresando a la ruta ``` "/" o /home ``` se llega a un template (``` En desarrollo ```) de lo que va a ser el home de la pagina 
 - Productos : Filtros por cada categoria de productos y por su totalidad accediendo desde el menu o a las rutas ```/productos y /productos/:categoria``` .
     - Detalle del producto : Una vez seleccionado un producto podras seleccionar una cantidad determinada y agregarlos a tu carrito de compra
     - Stock : No podras incluir cantidades que desborden el limite de stock para cada producto, deshabilitando el boton de agregar al carrito en caso de ya estar en 0 , o con un alert dialog en caso de que tu agregado este superando el limite actual.
