@@ -75,7 +75,6 @@ const DesktopNav = () => {
     </Stack>
   );
 };
-
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
@@ -113,7 +112,6 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
     </Link>
   );
 };
-
 const MobileNav = () => {
   return (
     <Stack
@@ -127,7 +125,6 @@ const MobileNav = () => {
     </Stack>
   );
 };
-
 const MobileNavItem = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -180,7 +177,6 @@ const MobileNavItem = ({ label, children, href }) => {
     </Stack>
   );
 };
-
 const NAV_ITEMS = [
 
   {
@@ -217,7 +213,6 @@ const NAV_ITEMS = [
     href: "#",
   },
 ];
-
 function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
   const { getCartQty } = useCartContext();

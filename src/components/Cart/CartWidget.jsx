@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import { Stack, Badge, useDisclosure,IconButton } from "@chakra-ui/react";
 import { BsCart } from "react-icons/bs";
 import CartDrawer from "./CartDrawer";

@@ -13,7 +13,6 @@ import {
   Icon,
   useToast,
   useDisclosure,
-  Button,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import ItemCount from "./ItemCount";
@@ -23,9 +22,12 @@ import { useCartContext } from "../../context/CartContext";
 import SimpleAlertDialog from "../OtherComponents/alert/SimpleAlertDialog";
 
 export default function ItemDetail({ prod }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  //This two constant ar mocks for style purposes, in future versions there going to be included in the product response
   const precioEfectivo = Math.trunc(parseInt(prod.price) / 1.15);
   const cuotas = Math.trunc(parseInt(prod.price) / 3);
+
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [talle, setTalle] = useState("medium");
   const { addToCart, cartList } = useCartContext();
   const toast = useToast();

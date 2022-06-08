@@ -8,7 +8,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import NotFound from "../OtherComponents/NotFound/NotFound";
 
 export default function ItemDetailContainer() {
-  const [producto, setProducto] = useState({});
+  const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
@@ -17,7 +17,7 @@ export default function ItemDetailContainer() {
     const db = getFirestore();
     const dbQuery = doc(db, "productos", id);
     getDoc(dbQuery)
-      .then((prod) => setProducto({ id: prod.id, ...prod.data() }))
+      .then((prod) => setProduct({ id: prod.id, ...prod.data() }))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, [id]);
@@ -27,13 +27,13 @@ export default function ItemDetailContainer() {
     <Box>
       {loading ? (
         <ItemDetailSkeleton />
-      ) : Object.keys(producto).length === 1 ? (
+      ) : Object.keys(product).length === 1 ? (
         <NotFound
           title={"Ups! No encontramos el producto que estas buscando"}
           description={"No te preocupes haz click abajo para recorrer nuestra tienda"}
         />
       ) : (
-        <ItemDetail key={producto.id} prod={producto} />
+        <ItemDetail key={product.id} prod={product} />
       )}
     </Box>
   );

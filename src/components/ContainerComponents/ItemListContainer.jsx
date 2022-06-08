@@ -13,7 +13,7 @@ import {
 import NotFound from "../OtherComponents/NotFound/NotFound";
 
 function ItemListContainer() {
-  const [productos, setProductos] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { categoria } = useParams();
 
@@ -26,7 +26,7 @@ function ItemListContainer() {
       : queryCollection;
     getDocs(queryCollectionFilter)
       .then((resp) =>
-        setProductos(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
+        setProducts(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
       )
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -52,14 +52,14 @@ function ItemListContainer() {
             <ItemSkeleton />
           </WrapItem>
         </>
-      ) : productos.length === 0 ? (
+      ) : products.length === 0 ? (
         <WrapItem>
           <NotFound
             title={`Ups!! En este momento no tenemos stock de ${categoria}`}
           />
         </WrapItem>
       ) : (
-        productos.map((prod) => (
+        products.map((prod) => (
           <WrapItem key={prod.id}>
             <Item prod={prod} />
           </WrapItem>
@@ -70,4 +70,3 @@ function ItemListContainer() {
 }
 
 export default ItemListContainer;
-

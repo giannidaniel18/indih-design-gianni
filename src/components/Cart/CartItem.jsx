@@ -15,11 +15,11 @@ import SimpleAlertDialog from "../OtherComponents/alert/SimpleAlertDialog";
 
 export default function CartItem({ prod }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
- 
+
   const addToCartColors = useColorModeValue("primaryDark", "primary");
   const { deleteFromCart, updateCartItem } = useCartContext();
 
-  const sumarContador = () => {
+  const incrementCounter = () => {
     if (prod.cantidad === prod.stock) {
       onOpen(); // alert("no se puede agregar mas items al carrito por falta de stock")
     } else {
@@ -28,7 +28,7 @@ export default function CartItem({ prod }) {
       updateCartItem(cartItemToUpdate);
     }
   };
-  const restarContador = () => {
+  const decrementCounter = () => {
     if (prod.cantidad === 1) {
     } else {
       const cartItemToUpdate = { ...prod };
@@ -36,17 +36,13 @@ export default function CartItem({ prod }) {
       updateCartItem(cartItemToUpdate);
     }
   };
-
   const delteItem = () => {
     deleteFromCart(prod.id);
-    
   };
 
   return (
-   
-
     <Stack
-    animateopacity='true'
+      animateopacity="true"
       direction={"row"}
       border={"1x"}
       borderColor={useColorModeValue("gray.400", "gray.400")}
@@ -80,7 +76,7 @@ export default function CartItem({ prod }) {
               _active={""}
               _focus={""}
               _hover={""}
-              onClick={restarContador}
+              onClick={decrementCounter}
             />
 
             <Text fontSize={23}>{prod.cantidad}</Text>
@@ -95,7 +91,7 @@ export default function CartItem({ prod }) {
               _active={""}
               _focus={""}
               _hover={""}
-              onClick={sumarContador}
+              onClick={incrementCounter}
             />
           </Stack>
         </Stack>
@@ -129,6 +125,5 @@ export default function CartItem({ prod }) {
         </Stack>
       </Stack>
     </Stack>
-   
   );
 }

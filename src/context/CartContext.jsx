@@ -41,9 +41,6 @@ const CartContextProvider = ({ children }) => {
     return sum;
   };
   
- 
-
-
   return (
     <CartContext.Provider
       value={{

@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link as reactLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  where,
-  addDoc,
-} from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import {
   Box,
   Button,
@@ -29,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { BiShoppingBag } from "react-icons/bi";
 import { BsCreditCard } from "react-icons/bs";
-import { FaShippingFast, FaStoreAlt } from "react-icons/fa";
+import { FaShippingFast } from "react-icons/fa";
 import { useCartContext } from "../../context/CartContext";
 import CartItem from "./CartItem";
 import NotFound from "../OtherComponents/NotFound/NotFound";
@@ -40,19 +33,13 @@ export default function Cart() {
   const inputbordercolor = useColorModeValue("gray.400", undefined);
 
   //USING CART CONTEXT
-  const { cartList, getTotalPrice, getCartQty, clearCartList } =
-    useCartContext();
+  const { cartList, getTotalPrice, getCartQty, clearCartList } =useCartContext();
   const cartTotalPrice = getTotalPrice();
-  const listado = cartList.map((prod) => (
+  const productList = cartList.map((prod) => (
     <CartItem key={prod.id} prod={prod} />
   ));
   // REACT HOOK FORM
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => CreateOrder(data);
   const [orderId, setorderId] = useState(null);
   const [shippingmethod, setshippingmethod] = useState("env_01");
@@ -103,7 +90,7 @@ export default function Cart() {
           </VStack>
           <VStack>
             <Stack minWidth={{ base: 300, lg: 600 }} gap={10}>
-              {listado}
+              {productList}
               <Stack
                 fontSize={35}
                 fontWeight={"light"}
@@ -150,7 +137,7 @@ export default function Cart() {
           <FormControl isRequired mb={2} mr={5}>
             <FormLabel fontSize={"2xl"}>Datos de contacto</FormLabel>
             <Input
-            borderColor={inputbordercolor}
+              borderColor={inputbordercolor}
               id="clientName"
               type="text"
               placeholder="Nombre"
@@ -159,7 +146,7 @@ export default function Cart() {
           </FormControl>
           <FormControl isRequired mb={2} mr={5}>
             <Input
-            borderColor={inputbordercolor}
+              borderColor={inputbordercolor}
               id="clientSurName"
               type="text"
               placeholder="Apellido"
@@ -168,7 +155,7 @@ export default function Cart() {
           </FormControl>
           <FormControl isRequired mb={2} mr={5}>
             <Input
-            borderColor={inputbordercolor}
+              borderColor={inputbordercolor}
               id="clientPhone"
               type="number"
               placeholder="+54 9 11XXXXXXX"
@@ -179,7 +166,11 @@ export default function Cart() {
             <FormLabel fontSize={"2xl"}>
               Seleccione el método de envío <Icon pt={2} as={FaShippingFast} />{" "}
             </FormLabel>
-            <RadioGroup defaultValue="env_01" onChange={toggleShippingMethod} value={shippingmethod}>
+            <RadioGroup
+              defaultValue="env_01"
+              onChange={toggleShippingMethod}
+              value={shippingmethod}
+            >
               <HStack spacing="24px">
                 <Radio value="env_01" {...register("deliveryMethod")}>
                   {"Envio a domicilio "}
@@ -200,7 +191,7 @@ export default function Cart() {
                 Direccion de entrega
               </FormLabel>
               <Input
-              borderColor={inputbordercolor}  
+                borderColor={inputbordercolor}
                 id="clientDirection"
                 type="text"
                 placeholder="calle falsa 123"
@@ -240,12 +231,7 @@ export default function Cart() {
     const db = getFirestore();
     const queryCollection = collection(db, "orders");
     const createDoc = await addDoc(queryCollection, order);
-    console.log(createDoc);
     setorderId(createDoc.id);
     clearCartList();
-
-    // .then((resp) => setorderId(resp.id))
-    // .catch((err) => console.log(err))
-    // .finally();
   }
 }
