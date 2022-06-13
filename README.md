@@ -10,7 +10,7 @@
 
 
 ## 🌏 Sitio Web  ![Js](https://img.shields.io/badge/-JavaScript-yellow) ![React](https://img.shields.io/badge/-React%20js-blue) ![Chakra](https://img.shields.io/badge/-Chakra%20UI-70CAD1) ![firebase](https://img.shields.io/badge/-Firebase%F0%9F%94%A5-FABC2C)
-### 👉 [indih-design](https://indih-design-gianni.vercel.app/)
+### 👉 [Sitio web 🌏](https://indih-design-gianni.vercel.app/)
 
 ![](web-gif.gif)
 
